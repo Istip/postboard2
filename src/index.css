@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 * {
@@ -11,6 +10,7 @@
 .heading {
   font-family: "Cal Sans", system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
+
 :root {
   font-family: "Inter Tight", system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-synthesis: none;

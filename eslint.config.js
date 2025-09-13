@@ -19,5 +19,10 @@ export default tseslint.config([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
+
+    /* Disable multiple exports lint fix */
+    rules: {
+      "react-refresh/only-export-components": "off",
+    },
   },
 ]);

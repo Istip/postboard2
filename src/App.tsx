@@ -11,7 +11,9 @@ const App = () => {
         aspernatur ab explicabo labore facilis enim praesentium expedita quia
         atque.
       </p>
-      <Button>Click me</Button>
+      <div className="p-2 m-2 border">
+        <Button>Click me</Button>
+      </div>
     </div>
   );
 };

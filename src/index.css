@@ -12,6 +12,12 @@
   font-family: "Cal Sans", system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 * {
   font-family: "Inter Tight", system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-synthesis: none;

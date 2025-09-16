@@ -15,7 +15,7 @@ export default function App() {
             ullam adipisci aspernatur ab explicabo labore facilis enim
             praesentium expedita quia atque.
           </p>
-          <Button>AUTHENTICATE</Button>
+          <Button>Apply For Free</Button>
         </div>
       </div>
     </ThemeProvider>

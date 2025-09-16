@@ -4,7 +4,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-neon: #e3ff32;
+  --color-neon: oklch(0.9476 0.2088 117.76);
+  /* --color-neon: #e3ff32; */
   --color-accent: #3ac7ff;
   --color-dark: #151517;
   --color-medium: #1f1f23;

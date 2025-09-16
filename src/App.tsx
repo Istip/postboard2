@@ -16,6 +16,7 @@ export default function App() {
             praesentium expedita quia atque.
           </p>
           <Button>Apply For Free</Button>
+          <Button variant="secondary">Click to navigate</Button>
         </div>
       </div>
     </ThemeProvider>

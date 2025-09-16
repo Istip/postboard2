@@ -1,4 +1,4 @@
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Computer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -6,13 +6,29 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useTheme, type Theme } from "@/components/Theme/ThemeProvider";
+import { useTheme } from "@/components/Theme/ThemeProvider";
 import ScreenReader from "@/components/helpers/ScreenReader";
+
+type Theme = {
+  name: "light" | "dark" | "system";
+  icon: "Sun" | "Moon" | "Computer";
+};
 
 export function ThemeToggle() {
   const { setTheme } = useTheme();
 
-  const themes = ["light", "dark", "system"] as Theme[];
+  const iconMap = { Sun, Moon, Computer };
+
+  const themes: Theme[] = [
+    { name: "light", icon: "Sun" },
+    { name: "dark", icon: "Moon" },
+    { name: "system", icon: "Computer" },
+  ];
+
+  const TogglerIcon = ({ name }: { name: string }) => {
+    const IconComponent = iconMap[name as keyof typeof iconMap];
+    return <IconComponent className="mr-2 h-4 w-4" />;
+  };
 
   return (
     <DropdownMenu>
@@ -24,13 +40,14 @@ export function ThemeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {themes.map((theme) => (
+        {themes.map(({ name, icon }) => (
           <DropdownMenuItem
-            key={theme}
-            onClick={() => setTheme(theme)}
+            key={name}
+            onClick={() => setTheme(name)}
             className="cursor-pointer capitalize"
           >
-            {theme}
+            <TogglerIcon name={icon} />
+            <span>{name}</span>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

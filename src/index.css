@@ -5,6 +5,7 @@
 
 @theme {
   --color-neon: #e3ff32;
+  --color-accent: #ff32e3;
 }
 
 .heading {

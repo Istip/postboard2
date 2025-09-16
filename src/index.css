@@ -5,7 +5,10 @@
 
 @theme {
   --color-neon: #e3ff32;
-  --color-accent: #ff32e3;
+  --color-accent: #3ac7ff;
+  --color-dark: #151517;
+  --color-medium: #1f1f23;
+  --color-light: #f1f1f3;
 }
 
 .heading {
@@ -19,7 +22,7 @@
 }
 
 * {
-  font-family: "Inter Tight", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Manrope", system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

@@ -27,15 +27,21 @@ export function ThemeToggle() {
 
   const TogglerIcon = ({ name }: { name: string }) => {
     const IconComponent = iconMap[name as keyof typeof iconMap];
-    return <IconComponent className="mr-2 h-4 w-4" />;
+    return <IconComponent strokeWidth={1} className="mr-2 h-4 w-4" />;
   };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+        <Button variant="default" size="icon">
+          <Sun
+            strokeWidth={1}
+            className="scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
+          />
+          <Moon
+            strokeWidth={1}
+            className="absolute scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
+          />
           <ScreenReader>Toggle theme</ScreenReader>
         </Button>
       </DropdownMenuTrigger>

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/stores/auth.store";
 import Register from "@/components/Authentication/Register";
@@ -8,12 +7,6 @@ const Authentication = () => {
   const loading = useAuthStore((state) => state.loading);
   const login = useAuthStore((state) => state.login);
   const logout = useAuthStore((state) => state.logout);
-  const fetchUser = useAuthStore((state) => state.fetchUser);
-
-  useEffect(() => {
-    fetchUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleLogin = async () => {
     login("", "");

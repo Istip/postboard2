@@ -7,7 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useTheme } from "@/components/Theme/ThemeProvider";
-import ScreenReader from "@/components/helpers/ScreenReader";
+import ScreenReader from "@/components/Helpers/ScreenReader";
 
 type Theme = {
   name: "light" | "dark" | "system";

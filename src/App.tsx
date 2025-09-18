@@ -1,24 +1,23 @@
-import { Button } from "@/components/ui/button";
 import { ThemeProvider } from "@/components/Theme/ThemeProvider";
-import { ThemeToggle } from "@/components/Theme/ThemeToggle";
+import { Route, BrowserRouter as Router, Routes } from "react-router";
+import DashboardLayout from "@/layouts/DashboardLayout";
+import Authentication from "@/pages/Authentication";
+import Dashboard from "@/pages/Dashboard";
+import Home from "@/pages/Home";
 
 export default function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <ThemeToggle />
-      <div className="center">
-        <div className="container p-4">
-          <h1 className="heading text-4xl text-center">Postboard</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. In
-            repellat, distinctio earum quaerat eius qui sit iste consequatur
-            ullam adipisci aspernatur ab explicabo labore facilis enim
-            praesentium expedita quia atque.
-          </p>
-          <Button>Apply For Free</Button>
-          <Button variant="secondary">Click to navigate</Button>
-        </div>
-      </div>
+      <Router>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="auth" element={<Authentication />} />
+
+          <Route element={<DashboardLayout />}>
+            <Route path="dashboard" element={<Dashboard />} />
+          </Route>
+        </Routes>
+      </Router>
     </ThemeProvider>
   );
 }

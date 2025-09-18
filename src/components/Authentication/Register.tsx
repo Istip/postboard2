@@ -14,6 +14,7 @@ import { useAuthStore } from "@/stores/auth.store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider as Form, useForm } from "react-hook-form";
 import { z } from "zod";
+import Error from "@/components/Helpers/Error";
 
 const Register = () => {
   const register = useAuthStore((state) => state.register);
@@ -126,7 +127,7 @@ const Register = () => {
           </Button>
         </form>
       </Form>
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <Error>{error}</Error>}
     </div>
   );
 };

@@ -15,11 +15,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider as Form, useForm } from "react-hook-form";
 import { z } from "zod";
 import Error from "@/components/Helpers/Error";
+import { useNavigate } from "react-router";
 
 const Register = () => {
   const register = useAuthStore((state) => state.register);
   const error = useAuthStore((state) => state.error);
   const loading = useAuthStore((state) => state.loading);
+
+  const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof registerFormSchema>>({
     resolver: zodResolver(registerFormSchema),
@@ -35,9 +38,10 @@ const Register = () => {
     try {
       const id = ID.unique();
       await register(id, data.email, data.password, data.name);
-      form.reset();
 
-      // TODO: Add navigation to main dashboard
+      // Clear the form and navigate to the dashboard
+      form.reset();
+      navigate("/");
     } catch (error) {
       console.error("Registration error:", error);
     }

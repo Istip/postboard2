@@ -13,11 +13,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useNavigate } from "react-router";
 
 const Login = () => {
   const login = useAuthStore((state) => state.login);
   const error = useAuthStore((state) => state.error);
   const loading = useAuthStore((state) => state.loading);
+
+  const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
@@ -30,9 +33,10 @@ const Login = () => {
   const onSubmit = async (data: z.infer<typeof loginFormSchema>) => {
     try {
       await login(data.email, data.password);
-      form.reset();
 
-      // TODO: Add navigation to main dashboard
+      // Clear the form and navigate to the dashboard
+      form.reset();
+      navigate("/");
     } catch (error) {
       console.error("Login error:", error);
     }

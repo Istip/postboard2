@@ -45,7 +45,7 @@ const Register = () => {
   };
 
   return (
-    <div className="p-8">
+    <>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -128,7 +128,7 @@ const Register = () => {
         </form>
       </Form>
       {error && <Error>{error}</Error>}
-    </div>
+    </>
   );
 };
 

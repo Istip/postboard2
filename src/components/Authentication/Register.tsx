@@ -1,4 +1,4 @@
-import { formSchema } from "@/components/Authentication/register.schema";
+import { registerFormSchema } from "@/components/Authentication/register.schema";
 import { Button } from "@/components/ui/button";
 import {
   FormControl,
@@ -21,8 +21,8 @@ const Register = () => {
   const error = useAuthStore((state) => state.error);
   const loading = useAuthStore((state) => state.loading);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof registerFormSchema>>({
+    resolver: zodResolver(registerFormSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -32,7 +32,7 @@ const Register = () => {
     mode: "onBlur",
   });
 
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+  const onSubmit = async (data: z.infer<typeof registerFormSchema>) => {
     try {
       const id = ID.unique();
       await register(id, data.email, data.password, data.name);

@@ -25,7 +25,6 @@ const Login = () => {
       email: "",
       password: "",
     },
-    mode: "onBlur",
   });
 
   const onSubmit = async (data: z.infer<typeof loginFormSchema>) => {

@@ -29,7 +29,6 @@ const Register = () => {
       password: "",
       confirmPassword: "",
     },
-    mode: "onBlur",
   });
 
   const onSubmit = async (data: z.infer<typeof registerFormSchema>) => {

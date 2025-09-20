@@ -5,7 +5,7 @@
 
 @theme {
   --color-neon: oklch(0.9476 0.2088 117.76);
-  /* --color-neon: #e3ff32; */
+  --color-neon: #e3ff32;
   --color-accent: oklch(0.7801 0.139863 229.8671);
   --color-accent: #3ac7ff;
   --color-dark: oklch(0.1966 0.004 286.03);

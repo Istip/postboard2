@@ -2,15 +2,20 @@ import { useAuthStore } from "@/stores/auth.store";
 import { useNavigate } from "react-router";
 import { ThemeToggle } from "@/components/Theme/ThemeToggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { initials } from "@/lib/initials";
+import { Button } from "@/components/ui/button";
+import Divider from "@/components/Helpers/Divider";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { initials } from "@/lib/initials";
-import { Button } from "@/components/ui/button";
-import Divider from "@/components/Helpers/Divider";
 
 const Navigation = () => {
   const user = useAuthStore((state) => state.user);
@@ -33,12 +38,17 @@ const Navigation = () => {
       <div className="center">
         {user && (
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Avatar className="cursor-pointer">
-                <AvatarImage src="" alt="User Avatar" />
-                <AvatarFallback>{initials(user!.name)}</AvatarFallback>
-              </Avatar>
-            </DropdownMenuTrigger>
+            <Tooltip>
+              <TooltipTrigger>
+                <DropdownMenuTrigger asChild>
+                  <Avatar className="cursor-pointer">
+                    <AvatarImage src="" alt="User Avatar" />
+                    <AvatarFallback>{initials(user!.name)}</AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+              </TooltipTrigger>
+              <TooltipContent>Open the Profile Menu</TooltipContent>
+            </Tooltip>
             <DropdownMenuContent className="p-2 mr-2">
               <div className="center flex-col">
                 <h2 className="text-xl">Hello,</h2>
@@ -52,13 +62,20 @@ const Navigation = () => {
               <Divider />
               <ThemeToggle />
               <Divider />
-              <DropdownMenuItem
-                variant="destructive"
-                onClick={logout}
-                className="text-center center"
-              >
-                Logout
-              </DropdownMenuItem>
+              <Tooltip>
+                <TooltipTrigger>
+                  <DropdownMenuItem
+                    variant="destructive"
+                    onClick={logout}
+                    className="text-center center"
+                  >
+                    Logout
+                  </DropdownMenuItem>
+                  <TooltipContent>
+                    Logging out? Why would you do that?
+                  </TooltipContent>
+                </TooltipTrigger>
+              </Tooltip>
             </DropdownMenuContent>
           </DropdownMenu>
         )}

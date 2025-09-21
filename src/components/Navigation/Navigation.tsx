@@ -26,7 +26,7 @@ const Navigation = () => {
   const handleNavigateHome = () => navigate("/");
 
   return (
-    <nav className="border-b border-secondary p-4 flex items-center justify-between shadow-primary shadow-xs transition-all delay-200 hover:shadow-md">
+    <nav className="border-b border-secondary p-4 flex items-center justify-between shadow-primary shadow-xs transition-all delay-200 lg:hover:shadow-md">
       <div className="h-4 w-4 rounded-full bg-primary">
         <Button
           variant="ghost"

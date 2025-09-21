@@ -1,4 +1,5 @@
 import { useAuthStore } from "@/stores/auth.store";
+import { useNavigate } from "react-router";
 import { ThemeToggle } from "@/components/Theme/ThemeToggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -8,14 +9,27 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { initials } from "@/lib/initials";
+import { Button } from "@/components/ui/button";
+import Divider from "@/components/Helpers/Divider";
 
 const Navigation = () => {
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
 
+  const navigate = useNavigate();
+
+  const handleNavigateHome = () => navigate("/");
+
   return (
-    <nav className="border-b p-4 flex items-center justify-between">
-      <div className="h-4 w-4 rounded-full bg-neon" />
+    <nav className="border-b border-secondary p-4 flex items-center justify-between shadow-primary shadow-xs transition-all delay-200 hover:shadow-md">
+      <div className="h-4 w-4 rounded-full bg-primary">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-4 w-4 p-0"
+          onClick={handleNavigateHome}
+        />
+      </div>
       <div className="center">
         {user && (
           <DropdownMenu>
@@ -25,11 +39,26 @@ const Navigation = () => {
                 <AvatarFallback>{initials(user!.name)}</AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <ThemeToggle />
+            <DropdownMenuContent className="p-2 mr-2">
+              <div className="center flex-col">
+                <h2 className="text-xl">Hello,</h2>
+                <p className="font-black">{user?.name}</p>
+              </div>
+              <Divider />
+              <DropdownMenuItem>Home</DropdownMenuItem>
+              <Divider>SETTINGS</Divider>
               <DropdownMenuItem>Profile</DropdownMenuItem>
               <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
+              <Divider />
+              <ThemeToggle />
+              <Divider />
+              <DropdownMenuItem
+                variant="destructive"
+                onClick={logout}
+                className="text-center center"
+              >
+                Logout
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         )}

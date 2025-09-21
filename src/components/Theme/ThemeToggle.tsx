@@ -23,7 +23,7 @@ export function ThemeToggle() {
     const IconComponent = iconMap[name as keyof typeof iconMap];
     return (
       <div className="flex justify-center items-center text-center">
-        <IconComponent strokeWidth={1} className="h-4 w-4 " />
+        <IconComponent className="h-4 w-4 " />
       </div>
     );
   };

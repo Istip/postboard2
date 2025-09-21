@@ -6,7 +6,7 @@ const Home = () => {
   const logout = useAuthStore((state) => state.logout);
 
   return (
-    <div>
+    <>
       Hello <b>{user ? user.name : "Guest"}</b>
       <br />
       <br />
@@ -14,7 +14,7 @@ const Home = () => {
       <Button variant="outline" onClick={logout}>
         Logout
       </Button>
-    </div>
+    </>
   );
 };
 

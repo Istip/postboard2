@@ -29,7 +29,7 @@ export function ThemeToggle() {
   };
 
   return (
-    <div className="border bg-card p-2 rounded-sm mb-2">
+    <div className="border p-2 rounded-sm mb-2 bg-secondary">
       <h2 className="text-center pb-2">Theme selector</h2>
       <div className="center gap-2">
         {themes.map(({ name, icon }) => (

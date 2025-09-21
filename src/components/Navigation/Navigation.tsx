@@ -11,6 +11,7 @@ import { initials } from "@/lib/initials";
 
 const Navigation = () => {
   const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
 
   return (
     <nav className="border-b p-4 flex items-center justify-between">
@@ -28,7 +29,7 @@ const Navigation = () => {
               <ThemeToggle />
               <DropdownMenuItem>Profile</DropdownMenuItem>
               <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         )}

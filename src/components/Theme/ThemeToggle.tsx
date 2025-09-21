@@ -32,7 +32,7 @@ export function ThemeToggle() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild className="rounded-full">
         <Button variant="default" size="icon">
           <Sun
             strokeWidth={1}

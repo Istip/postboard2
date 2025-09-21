@@ -63,7 +63,7 @@ const Navigation = () => {
               <ThemeToggle />
               <Divider />
               <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger asChild>
                   <DropdownMenuItem
                     variant="destructive"
                     onClick={logout}
@@ -71,10 +71,10 @@ const Navigation = () => {
                   >
                     Logout
                   </DropdownMenuItem>
-                  <TooltipContent>
-                    Logging out? Why would you do that?
-                  </TooltipContent>
                 </TooltipTrigger>
+                <TooltipContent>
+                  Logging out? Why would you do that?
+                </TooltipContent>
               </Tooltip>
             </DropdownMenuContent>
           </DropdownMenu>

@@ -3,7 +3,7 @@ const Divider = ({ children }: { children?: string }) => {
     return (
       <div className="center gap-2">
         <div className="h-[1px] w-full bg-secondary rounded-full my-4"></div>
-        <div className="text-[10px] text-primary">{children}</div>
+        <div className="text-[10px] text-accent-foreground">{children}</div>
         <div className="h-[1px] w-full bg-secondary rounded-full my-4"></div>
       </div>
     );

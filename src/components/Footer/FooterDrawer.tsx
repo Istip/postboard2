@@ -15,7 +15,7 @@ import ScreenReader from "@/components/Helpers/ScreenReader";
 const FooterDrawer = () => {
   return (
     <Drawer>
-      <DrawerTrigger>
+      <DrawerTrigger asChild>
         <Button variant="secondary" size="sm">
           <Menu />
           <ScreenReader>Open drawer</ScreenReader>

@@ -22,14 +22,14 @@ const Navigation = () => {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar className="cursor-pointer">
-              <AvatarImage src="" alt="User Avatar" />
-              <AvatarFallback>{initials(user!.name)}</AvatarFallback>
+              <AvatarImage src="" alt={user.name} />
+              <AvatarFallback>{initials(user.name)}</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
 
           <DropdownMenuContent className="p-2 mr-2 text-center">
             <h2 className="text-xl heading text-muted-foreground">
-              Hello, <p className="heading text-primary">{user?.name}</p>
+              Hello, <p className="heading text-primary">{user.name}</p>
             </h2>
             <Divider>PAGES</Divider>
             <DropdownMenuItem>Home</DropdownMenuItem>

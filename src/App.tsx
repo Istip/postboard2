@@ -14,7 +14,6 @@ export default function App() {
     fetchUser();
   }, [fetchUser]);
 
-  // TODO: add loading
   if (loading) return null;
 
   return (

@@ -4,11 +4,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { initials } from "@/lib/initials";
 import Divider from "@/components/Helpers/Divider";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -25,27 +20,24 @@ const Navigation = () => {
       <Logo />
       {user && (
         <DropdownMenu>
-          <Tooltip>
-            <TooltipTrigger>
-              <DropdownMenuTrigger asChild>
-                <Avatar className="cursor-pointer">
-                  <AvatarImage src="" alt="User Avatar" />
-                  <AvatarFallback>{initials(user!.name)}</AvatarFallback>
-                </Avatar>
-              </DropdownMenuTrigger>
-            </TooltipTrigger>
-            <TooltipContent>Open the Profile Menu</TooltipContent>
-          </Tooltip>
+          <DropdownMenuTrigger asChild>
+            <Avatar className="cursor-pointer">
+              <AvatarImage src="" alt="User Avatar" />
+              <AvatarFallback>{initials(user!.name)}</AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
 
           <DropdownMenuContent className="p-2 mr-2 text-center">
-            <h2 className="text-xl">Hello,</h2>
-            <p className="font-black">{user?.name}</p>
-            <Divider />
+            <h2 className="text-xl heading text-muted-foreground">
+              Hello, <p className="heading text-primary">{user?.name}</p>
+            </h2>
+            <Divider>PAGES</Divider>
             <DropdownMenuItem>Home</DropdownMenuItem>
+            <DropdownMenuItem>About</DropdownMenuItem>
+            <DropdownMenuItem>Contact</DropdownMenuItem>
             <Divider>SETTINGS</Divider>
             <DropdownMenuItem>Profile</DropdownMenuItem>
             <DropdownMenuItem>Settings</DropdownMenuItem>
-            <Divider />
             <ThemeToggle />
             <DropdownMenuItem variant="destructive" onClick={logout}>
               Logout

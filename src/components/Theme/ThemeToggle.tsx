@@ -4,6 +4,7 @@ import { useTheme } from "@/components/Theme/ThemeProvider";
 import ScreenReader from "@/components/Helpers/ScreenReader";
 import { Tooltip, TooltipContent } from "@/components/ui/tooltip";
 import { TooltipTrigger } from "@radix-ui/react-tooltip";
+import { Card } from "@/components/ui/card";
 
 type Theme = {
   name: "light" | "dark" | "system";
@@ -31,29 +32,31 @@ export function ThemeToggle() {
   };
 
   return (
-    <div className="border p-2 rounded-sm mb-2 bg-secondary">
-      <h2 className="text-center pb-2">Theme selector</h2>
-      <div className="center gap-2">
-        {themes.map(({ name, icon }) => (
-          <Tooltip key={name}>
-            <TooltipTrigger asChild>
-              <Button
-                key={name}
-                onClick={() => setTheme(name)}
-                className="cursor-pointer capitalize"
-                size="icon"
-                variant={theme === name ? "default" : "secondary"}
-              >
-                <TogglerIcon name={icon} />
-                <ScreenReader>{name}</ScreenReader>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              Set theme to <b>{name !== "system" ? name : "system default"}</b>.
-            </TooltipContent>
-          </Tooltip>
-        ))}
+    <Card className="my-2 bg-secondary p-2 border rounded-md">
+      <div>
+        <h2 className="text-center text-sm pb-2">Theme selector</h2>
+        <div className="center gap-2">
+          {themes.map(({ name, icon }) => (
+            <Tooltip key={name}>
+              <TooltipTrigger asChild>
+                <Button
+                  key={name}
+                  onClick={() => setTheme(name)}
+                  className="cursor-pointer capitalize"
+                  size="icon"
+                  variant={theme === name ? "default" : "secondary"}
+                >
+                  <TogglerIcon name={icon} />
+                  <ScreenReader>{name}</ScreenReader>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                Set theme to <b>{name == "system" ? "system default" : name}</b>
+              </TooltipContent>
+            </Tooltip>
+          ))}
+        </div>
       </div>
-    </div>
+    </Card>
   );
 }

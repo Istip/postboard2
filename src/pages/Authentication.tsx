@@ -5,9 +5,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Register from "@/components/Authentication/Register";
 import Login from "@/components/Authentication/Login";
 import { Button } from "@/components/ui/button";
+import { Home } from "lucide-react";
 
 const Authentication = () => {
-  const [counter, setCounter] = useState(5);
+  const time = 5;
+
+  const [counter, setCounter] = useState(time);
   const user = useAuthStore((state) => state.user);
   const loading = useAuthStore((state) => state.loading);
 
@@ -16,7 +19,7 @@ const Authentication = () => {
   // Start countdown when user is present
   useEffect(() => {
     if (!user) return;
-    setCounter(5);
+    setCounter(time);
     const interval = setInterval(() => {
       setCounter((prev) => prev - 1);
     }, 1000);
@@ -35,18 +38,25 @@ const Authentication = () => {
 
   if (user) {
     return (
-      <>
-        <div>
-          You are already logged in as <b>{user.name}</b>
-        </div>
-        <div>
-          Redirecting to home in <b>{counter}</b> seconds...
+      <div className="flex flex-col justify-center items-center gap-4 w-screen h-[100dvh]">
+        <div className="text-center">
+          <p>
+            You are already logged in as{" "}
+            <b className="text-primary">{user.name}</b>
+          </p>
+          <p>
+            Redirecting to the Dashboard in{" "}
+            <b className="text-primary">{counter}</b> seconds...
+          </p>
         </div>
 
         <Button asChild variant="default">
-          <Link to="/">Go to home now</Link>
+          <Link to="/">
+            <Home />
+            Go to Dashboard
+          </Link>
         </Button>
-      </>
+      </div>
     );
   }
 

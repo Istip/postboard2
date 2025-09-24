@@ -16,7 +16,7 @@ const Navigation = () => {
   const logout = useAuthStore((state) => state.logout);
 
   return (
-    <nav className="bg-secondary border-b border-foreground/20 p-4 flex items-center justify-between shadow-primary shadow-xs transition-all duration-200  hover:shadow-md">
+    <nav className="fixed top-0 w-screen bg-secondary border-b border-foreground/20 p-4 flex items-center justify-between shadow-primary shadow-xs transition-all duration-200  hover:shadow-md">
       <Logo />
       {user && (
         <DropdownMenu>

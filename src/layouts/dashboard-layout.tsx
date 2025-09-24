@@ -6,7 +6,7 @@ const DashboardLayout = () => {
   return (
     <>
       <Navigation />
-      <div className="p-4 min-h-[calc(100dvh-71px)] pb-[71px]">
+      <div className="px-4 py-8 min-h-[calc(100dvh-71px)] pb-[71px] pt-[71px] my-4">
         <Outlet />
       </div>
       <Footer />

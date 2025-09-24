@@ -6,6 +6,51 @@ const Home = () => {
   return (
     <>
       Hello <b>{user ? user.name : "Guest"}</b>
+      <br />
+      <br />
+      <br />
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
+      <p>Welcome to the home page!</p>
     </>
   );
 };

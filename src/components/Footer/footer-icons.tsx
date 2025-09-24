@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BookLock, ShoppingBasket, StickyNote } from "lucide-react";
-import ScreenReader from "@/components/Helpers/ScreenReader";
+import ScreenReader from "@/components/helpers/screen-reader";
 
 const FooterIcons = () => {
   return (

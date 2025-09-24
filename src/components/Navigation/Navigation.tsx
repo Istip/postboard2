@@ -1,15 +1,15 @@
 import { useAuthStore } from "@/stores/auth.store";
-import { ThemeToggle } from "@/components/Theme/ThemeToggle";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { initials } from "@/lib/initials";
-import Divider from "@/components/Helpers/Divider";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Logo from "@/components/Navigation/Logo";
+import Logo from "@/components/navigation/logo";
+import Divider from "@/components/helpers/divider";
 
 const Navigation = () => {
   const user = useAuthStore((state) => state.user);

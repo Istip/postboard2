@@ -1,13 +1,13 @@
 import { Moon, Sun, SunMoon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useTheme } from "@/components/Theme/ThemeProvider";
+import { useTheme } from "@/components/theme/theme-provider";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Card } from "@/components/ui/card";
-import ScreenReader from "@/components/Helpers/ScreenReader";
+import ScreenReader from "@/components/helpers/screen-reader";
 
 type Theme = {
   name: "light" | "dark" | "system";

@@ -1,4 +1,4 @@
-import { registerFormSchema } from "@/components/Authentication/register.schema";
+import { registerFormSchema } from "@/components/authentication/register.schema";
 import { Button } from "@/components/ui/button";
 import {
   FormControl,

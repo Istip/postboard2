@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useAuthStore } from "@/stores/auth.store";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Register from "@/components/Authentication/Register";
-import Login from "@/components/Authentication/Login";
 import { Button } from "@/components/ui/button";
 import { Home } from "lucide-react";
+import Login from "@/components/authentication/Login";
+import Register from "@/components/authentication/Register";
 
 const Authentication = () => {
   const time = 5;

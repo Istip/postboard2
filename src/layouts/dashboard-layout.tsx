@@ -1,5 +1,5 @@
-import Footer from "@/components/Footer/Footer";
-import Navigation from "@/components/Navigation/Navigation";
+import Footer from "@/components/footer/footer";
+import Navigation from "@/components/navigation/navigation";
 import { Outlet } from "react-router";
 
 const DashboardLayout = () => {

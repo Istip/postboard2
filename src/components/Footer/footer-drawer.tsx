@@ -10,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { CirclePlus, Menu } from "lucide-react";
-import ScreenReader from "@/components/Helpers/ScreenReader";
+import ScreenReader from "@/components/helpers/screen-reader";
 
 const FooterDrawer = () => {
   return (

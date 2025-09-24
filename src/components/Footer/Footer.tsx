@@ -1,5 +1,5 @@
-import FooterDrawer from "@/components/Footer/FooterDrawer";
-import FooterIcons from "@/components/Footer/FooterIcons";
+import FooterDrawer from "@/components/footer/footer-drawer";
+import FooterIcons from "@/components/footer/footer-icons";
 
 const Footer = () => {
   return (

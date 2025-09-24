@@ -1,6 +1,6 @@
 import { useAuthStore } from "@/stores/auth.store";
 import { FormProvider, useForm } from "react-hook-form";
-import { loginFormSchema } from "@/components/Authentication/login.schema";
+import { loginFormSchema } from "@/components/authentication/login.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Error from "@/components/Helpers/Error";

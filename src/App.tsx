@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useAuthStore } from "@/stores/auth.store";
-import { ThemeProvider } from "@/components/Theme/ThemeProvider";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Route, BrowserRouter as Router, Routes } from "react-router";
-import DashboardLayout from "@/layouts/DashboardLayout";
-import Authentication from "@/pages/Authentication";
-import Home from "@/pages/Home";
+import DashboardLayout from "@/layouts/dashboard-layout";
+import Authentication from "@/pages/auth";
+import Home from "@/pages/home";
 
 export default function App() {
   const fetchUser = useAuthStore((state) => state.fetchUser);

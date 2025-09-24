@@ -14,7 +14,7 @@ import { useAuthStore } from "@/stores/auth.store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider as Form, useForm } from "react-hook-form";
 import { z } from "zod";
-import Error from "@/components/Helpers/Error";
+import Error from "@/components/helpers/error";
 import { useNavigate } from "react-router";
 
 const Register = () => {

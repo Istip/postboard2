@@ -4,8 +4,8 @@ import { useAuthStore } from "@/stores/auth.store";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Home } from "lucide-react";
-import Login from "@/components/authentication/Login";
-import Register from "@/components/authentication/Register";
+import Login from "@/components/authentication/login";
+import Register from "@/components/authentication/register";
 
 const Authentication = () => {
   const time = 5;

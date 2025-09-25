@@ -6,6 +6,9 @@ const Home = () => {
   return (
     <>
       Hello <b>{user ? user.name : "Guest"}</b>
+      <div contentEditable className="border">
+        Welcom to the home page!
+      </div>
       <br />
       <br />
       <br />

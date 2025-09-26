@@ -2,10 +2,16 @@ import { useEffect } from "react";
 import { useAuthStore } from "@/stores/auth.store";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Route, BrowserRouter as Router, Routes } from "react-router";
-import DashboardLayout from "@/layouts/dashboard-layout";
+
+// Pages
 import Authentication from "@/pages/auth";
 import Home from "@/pages/home";
 import Tutorial from "@/pages/tutorial";
+import Notes from "@/pages/notes";
+import Private from "@/pages/private";
+
+// Layouts
+import DashboardLayout from "@/layouts/dashboard-layout";
 
 export default function App() {
   const fetchUser = useAuthStore((state) => state.fetchUser);
@@ -25,6 +31,8 @@ export default function App() {
           <Route element={<DashboardLayout />}>
             <Route index element={<Home />} />
             <Route path="tutorial" element={<Tutorial />} />
+            <Route path="notes" element={<Notes />} />
+            <Route path="private" element={<Private />} />
           </Route>
         </Routes>
       </Router>

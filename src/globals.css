@@ -15,6 +15,7 @@
   --color-medium: #1f1f23;
   --color-light: oklch(0.9587 0.0027 286.35);
   --color-light: #f1f1f3;
+  --breakpoint-xs: 24rem;
 }
 
 .heading {

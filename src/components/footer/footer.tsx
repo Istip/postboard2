@@ -1,4 +1,4 @@
-import FooterDrawer from "@/components/footer/footer-drawer";
+import FooterDrawer from "@/components/footer/footer-drawer/footer-drawer";
 import FooterIcons from "@/components/footer/footer-icons";
 
 const Footer = () => {

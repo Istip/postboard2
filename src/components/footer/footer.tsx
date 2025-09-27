@@ -43,7 +43,7 @@ const Footer = () => {
           {show ? <X /> : <PlusCircleIcon />}
         </Button>
       </div>
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {show && (
           <motion.div
             key="footer-input"
@@ -79,7 +79,7 @@ const Footer = () => {
               className="w-full"
               autoFocus
             />
-            <Button onClick={handleClose}>
+            <Button onClick={() => console.log("Send message")}>
               <PlusCircleIcon />
             </Button>
           </motion.div>

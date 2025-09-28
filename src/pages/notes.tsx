@@ -1,5 +1,7 @@
+import Title from "@/components/ui/title";
+
 const Notes = () => {
-  return <div>Notes</div>;
+  return <Title>Notes</Title>;
 };
 
 export default Notes;

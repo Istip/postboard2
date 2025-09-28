@@ -1,5 +1,7 @@
+import Title from "@/components/ui/title";
+
 const Private = () => {
-  return <div>Private</div>;
+  return <Title>Private</Title>;
 };
 
 export default Private;

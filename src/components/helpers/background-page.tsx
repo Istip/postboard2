@@ -12,13 +12,15 @@ const BackgroundPage = ({ children, background }: BackgroundPageProps) => {
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundAttachment: "fixed",
+    position: "fixed" as const,
+    top: `${heights.navigation}px`,
+    bottom: `${heights.footer}px`,
+    left: 0,
+    right: 0,
   };
 
   return (
-    <div
-      className={`fixed inset-0 top-[${heights.navigation}px] bottom-[${heights.footer}px]`}
-      style={styles}
-    >
+    <div style={styles}>
       <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-background/95 to-background/90" />
       <div className="relative z-10 p-2">{children}</div>
     </div>

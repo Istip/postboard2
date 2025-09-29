@@ -1,10 +1,12 @@
+import BackgroundPage from "@/components/helpers/background-page";
 import Title from "@/components/ui/title";
+import { backgrounds } from "@/lib/image-urls";
 
 const Home = () => {
   return (
-    <>
+    <BackgroundPage background={backgrounds.shopping}>
       <Title>Shopping list</Title>
-    </>
+    </BackgroundPage>
   );
 };
 

@@ -1,6 +1,6 @@
 import BackgroundPage from "@/components/helpers/background-page";
 import Title from "@/components/ui/title";
-import { backgrounds } from "@/lib/image-urls";
+import { backgrounds } from "@/lib/backgrounds";
 
 const Private = () => {
   return (

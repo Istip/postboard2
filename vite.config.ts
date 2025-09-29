@@ -27,6 +27,10 @@ export default defineConfig({
         name: "Postboard - Manage your stuff efficiently",
         short_name: "Postboard",
         icons: manifestIcons,
+        /*
+         * For further manifest manipulation for theme colors, see:
+         * https://stackoverflow.com/questions/57456779/change-theme-color-when-switching-to-dark-mode
+         */
       },
     }),
   ],

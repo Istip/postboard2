@@ -75,7 +75,7 @@ const Footer = () => {
           >
             <Input
               type="text"
-              placeholder="Type your message here..."
+              placeholder="Enter your text here..."
               className="w-full"
               autoFocus
             />

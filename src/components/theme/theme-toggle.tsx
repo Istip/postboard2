@@ -45,9 +45,9 @@ export function ThemeToggle() {
                 <Button
                   key={name}
                   onClick={() => setTheme(name)}
-                  className="cursor-pointer capitalize"
+                  className="cursor-pointer"
                   size="icon"
-                  variant={theme === name ? "default" : "secondary"}
+                  variant={theme === name ? "default" : "outline"}
                 >
                   <TogglerIcon name={icon} />
                   <ScreenReader>{name}</ScreenReader>

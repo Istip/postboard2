@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { PlusCircleIcon, X } from "lucide-react";
+import { ChevronUpCircle, PlusCircleIcon, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import FooterIcons from "@/components/footer/footer-icons";
 
@@ -40,7 +40,7 @@ const Footer = () => {
           variant={show ? "ghost" : "default"}
           onClick={show ? handleClose : handleOpen}
         >
-          {show ? <X /> : <PlusCircleIcon />}
+          {show ? <X /> : <ChevronUpCircle />}
         </Button>
       </div>
       <AnimatePresence mode="wait">

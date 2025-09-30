@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BookLock, ShoppingBasket, StickyNote } from "lucide-react";
+import { LockIcon, ShoppingBasket, StickyNote } from "lucide-react";
 import { Link, useLocation } from "react-router";
 
 const FooterIcons = () => {
@@ -9,7 +9,7 @@ const FooterIcons = () => {
   const icons = [
     { icon: <ShoppingBasket />, label: "Shopping", route: "/", badge: 3 },
     { icon: <StickyNote />, label: "Notes", route: "/notes" },
-    { icon: <BookLock />, label: "Private", route: "/private" },
+    { icon: <LockIcon />, label: "Private", route: "/private" },
   ];
 
   return (

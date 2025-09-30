@@ -10,6 +10,7 @@ const Logo = () => {
       className="flex items-center"
       onHoverStart={() => !hovered && setHovered(true)}
       onHoverEnd={() => hovered && setHovered(false)}
+      whileTap={{ scale: 0.9, transition: { duration: 0.05 } }}
     >
       <Link to="/">
         <motion.div

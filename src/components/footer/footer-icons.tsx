@@ -18,14 +18,11 @@ const FooterIcons = () => {
         <Button
           key={index}
           variant={pathname === item.route ? "default" : "ghost"}
-          size="sm"
           asChild
         >
           <Link to={item.route}>
             {item.icon}
-            <span className="text-[10px] ml-1 hidden xs:block">
-              {item.label}
-            </span>
+            <span className="text-xs hidden xs:block">{item.label}</span>
             {item.badge && <Badge variant="secondary">{item.badge}</Badge>}
           </Link>
         </Button>

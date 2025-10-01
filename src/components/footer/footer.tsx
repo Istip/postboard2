@@ -1,9 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ChevronUpCircle, PlusCircleIcon, X } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+import { ChevronUpCircle, X } from "lucide-react";
 import FooterIcons from "@/components/footer/footer-icons";
+import FooterForm from "@/components/footer/footer-form";
 
 const Footer = () => {
   const [show, setShow] = useState(false);
@@ -43,48 +42,7 @@ const Footer = () => {
           {show ? <X /> : <ChevronUpCircle />}
         </Button>
       </div>
-      <AnimatePresence mode="wait">
-        {show && (
-          <motion.div
-            key="footer-input"
-            className="center gap-2 w-full"
-            initial={{
-              opacity: 0,
-              height: 0,
-              marginTop: 0,
-              paddingTop: 0,
-              paddingBottom: 0,
-            }}
-            animate={{
-              opacity: 1,
-              height: "auto",
-              marginTop: 8,
-              paddingTop: 0,
-              paddingBottom: 0,
-            }}
-            exit={{
-              opacity: 0,
-              height: 0,
-              marginTop: 0,
-              paddingTop: 0,
-              paddingBottom: 0,
-            }}
-            transition={{
-              duration: 0.2,
-            }}
-          >
-            <Input
-              type="text"
-              placeholder="Enter your text here..."
-              className="w-full"
-              autoFocus
-            />
-            <Button onClick={() => console.log("Send message")}>
-              <PlusCircleIcon />
-            </Button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <FooterForm show={show} />
     </footer>
   );
 };

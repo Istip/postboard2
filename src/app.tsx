@@ -12,6 +12,7 @@ import Private from "@/pages/private";
 
 // Layouts
 import DashboardLayout from "@/layouts/dashboard-layout";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function App() {
   const fetchUser = useAuthStore((state) => state.fetchUser);
@@ -36,6 +37,7 @@ export default function App() {
           </Route>
         </Routes>
       </Router>
+      <Toaster position="top-right" />
     </ThemeProvider>
   );
 }

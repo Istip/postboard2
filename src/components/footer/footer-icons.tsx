@@ -17,7 +17,7 @@ const FooterIcons = () => {
       {icons.map((item, index) => (
         <Button
           key={index}
-          variant={pathname === item.route ? "default" : "ghost"}
+          variant={pathname === item.route ? "outline" : "ghost"}
           asChild
           className="flex-1 xs:w-full flex mr-2"
         >

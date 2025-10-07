@@ -6,12 +6,14 @@ import { useShoppingStore } from "@/stores/shopping.store";
 import { useEffect } from "react";
 
 const FooterIcons = () => {
-  const { pathname } = useLocation();
   const totalCount = useShoppingStore((state) => state.totalCount);
+  const fetchCount = useShoppingStore((state) => state.fetchCount);
 
-  // Todo: review this fetch
+  const { pathname } = useLocation();
+
   useEffect(() => {
-    useShoppingStore.getState().fetchCount();
+    fetchCount();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const icons = [
@@ -36,9 +38,7 @@ const FooterIcons = () => {
         >
           <Link to={item.route}>
             {item.icon}
-            {pathname === item.route ? (
-              <span className="text-xs sm:block">{item.label}</span>
-            ) : null}
+            <span className="text-xs hidden xs:block">{item.label}</span>
             {item.badge && <Badge variant="secondary">{item.badge}</Badge>}
           </Link>
         </Button>

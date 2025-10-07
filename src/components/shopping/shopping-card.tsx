@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Bookmark, CheckCircle, InfoIcon, Trash } from "lucide-react";
-import { useState, useMemo } from "react";
+import { Bookmark, CheckCircle, Edit, InfoIcon, Trash } from "lucide-react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import {
   ShoppingCardWrapper,
   ShoppingCardTitle,
@@ -16,10 +16,23 @@ const ShoppingCard = ({ item }: Props) => {
   const [edit, setEdit] = useState(false);
   const [value, setValue] = useState(item.name);
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const isDefault = !item.done && !item.marked;
+
   const deleteItem = useShoppingStore((state) => state.deleteItem);
   const updateItem = useShoppingStore((state) => state.updateItem);
 
-  const isDefault = !item.done && !item.marked;
+  const handleUpdate = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (value.trim() && value !== item.name) {
+      updateItem(item.$id, { name: value.trim() });
+    } else {
+      setValue(item.name);
+    }
+    setEdit(false);
+  };
 
   const handleRemove = () => {
     deleteItem(item.$id);
@@ -33,12 +46,48 @@ const ShoppingCard = ({ item }: Props) => {
     updateItem(item.$id, { done: !item.done });
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Escape") {
+      setValue(item.name);
+      setEdit(false);
+    }
+  };
+
   const variant = useMemo(() => {
     if (item.done) return "done";
     if (item.marked) return "marked";
 
     return "default";
   }, [item.done, item.marked]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        edit &&
+        inputRef.current &&
+        !inputRef.current.contains(event.target as Node)
+      ) {
+        if (value.trim() && value !== item.name) {
+          updateItem(item.$id, { name: value.trim() });
+        } else {
+          setValue(item.name);
+        }
+        setEdit(false);
+      }
+    };
+
+    if (edit) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [edit, value, item.name, item.$id, updateItem]);
 
   return (
     <ShoppingCardWrapper
@@ -47,12 +96,17 @@ const ShoppingCard = ({ item }: Props) => {
     >
       <>
         {edit ? (
-          <form onSubmit={() => {}} onClick={() => setEdit(!edit)}>
+          <form onSubmit={handleUpdate} className="w-full gap-2 flex">
             <Input
+              ref={inputRef}
               value={value}
               autoFocus
-              onChange={(e) => setValue(e.target.value)}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
             />
+            <Button size="sm" variant="ghost">
+              <Edit />
+            </Button>
           </form>
         ) : (
           <ShoppingCardTitle variant={variant} className="flex gap-2 w-full">
@@ -60,7 +114,7 @@ const ShoppingCard = ({ item }: Props) => {
               className={`${
                 isDefault ? "cursor-pointer" : ""
               } w-full my-auto leading-5`}
-              onClick={() => isDefault && setEdit(!edit)}
+              onClick={() => isDefault && setEdit(true)}
             >
               {item.name}
             </div>
@@ -83,7 +137,9 @@ const ShoppingCard = ({ item }: Props) => {
             <Bookmark />
           </Button>
           <Button
-            variant={item.done ? "ghost" : item.marked ? "default" : "outline"}
+            variant={
+              item.done ? "ghost" : item.marked ? "default" : "secondary"
+            }
             size="sm"
             onClick={handleDone}
           >

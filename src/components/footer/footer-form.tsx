@@ -33,7 +33,15 @@ const FooterForm = ({ show }: Props) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (name.trim() === "") return;
+    if (nameExists) {
+      toast.warning(
+        <>
+          The item <strong className="font-black">{name}</strong> is already in
+          your shopping list.
+        </>
+      );
+      return;
+    }
 
     try {
       await createItem({
@@ -74,7 +82,7 @@ const FooterForm = ({ show }: Props) => {
               required
               onChange={handleChange}
             />
-            <Button type="submit" disabled={name.trim() === "" || nameExists}>
+            <Button type="submit" disabled={name.trim() === ""}>
               <PlusCircleIcon />
             </Button>
           </form>

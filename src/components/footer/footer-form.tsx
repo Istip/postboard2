@@ -17,6 +17,13 @@ const FooterForm = ({ show }: Props) => {
   const user = useAuthStore((state) => state.user);
   const createItem = useShoppingStore((state) => state.createItem);
 
+  const items = useShoppingStore((state) => state.items);
+
+  // check if any item.name from items contains the current name (case insensitive)
+  const nameExists = items?.some(
+    (item) => item.name.toLowerCase() === name.toLowerCase()
+  );
+
   const totalCount = useShoppingStore((state) => state.totalCount);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +42,6 @@ const FooterForm = ({ show }: Props) => {
         marked: false,
         creator: user!.name,
         creatorId: user!.$id,
-        // check if totalCount is passed correctly
         order: totalCount + 1,
       });
       setName("");
@@ -68,7 +74,7 @@ const FooterForm = ({ show }: Props) => {
               required
               onChange={handleChange}
             />
-            <Button type="submit">
+            <Button type="submit" disabled={name.trim() === "" || nameExists}>
               <PlusCircleIcon />
             </Button>
           </form>

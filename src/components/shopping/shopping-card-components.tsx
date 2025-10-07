@@ -33,9 +33,9 @@ export const ShoppingCardTitle = ({
   className?: string;
 }) => {
   const variantStyles = {
-    default: "text-base font-medium",
-    marked: "text-base font-medium text-background",
-    done: "text-base font-medium text-foreground/50",
+    default: "text-base",
+    marked: "text-base font-black text-background",
+    done: "text-base text-foreground/50",
   };
 
   return (

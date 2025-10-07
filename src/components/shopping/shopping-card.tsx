@@ -45,11 +45,17 @@ const ShoppingCard = ({ item }: Props) => {
   };
 
   const handleMarked = () => {
-    updateItem(item.$id, { marked: !item.marked });
+    updateItem(item.$id, {
+      marked: !item.marked,
+      done: item.done ? false : item.done,
+    });
   };
 
   const handleDone = () => {
-    updateItem(item.$id, { done: !item.done });
+    updateItem(item.$id, {
+      done: !item.done,
+      marked: item.marked ? false : item.marked,
+    });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

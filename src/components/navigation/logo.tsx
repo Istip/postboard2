@@ -23,6 +23,17 @@ const Logo = () => {
           }
           style={{ minWidth: 32 }}
         >
+          {!hovered && (
+            <motion.span
+              className="text-base heading font-bold text-background"
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.1 }}
+            >
+              P
+            </motion.span>
+          )}
           {hovered && (
             <motion.span
               className="text-base heading text-background"

@@ -37,7 +37,7 @@ const FooterForm = ({ show }: Props) => {
 
     try {
       await createItem({
-        name,
+        name: name.trim(),
         done: false,
         marked: false,
         creator: user!.name,

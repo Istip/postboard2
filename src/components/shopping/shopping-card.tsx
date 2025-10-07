@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Bookmark, Edit2Icon, SaveIcon, Trash2 } from "lucide-react";
+import { Bookmark, InfoIcon, Trash } from "lucide-react";
 import { useState, useMemo } from "react";
 import {
   ShoppingCardWrapper,
@@ -29,7 +29,7 @@ const ShoppingCard = ({ item }: Props) => {
       variant={variant}
       className="flex flex-col justify-between"
     >
-      <div>
+      <>
         {edit ? (
           <form onSubmit={() => {}} onClick={() => setEdit(!edit)}>
             <Input
@@ -39,25 +39,25 @@ const ShoppingCard = ({ item }: Props) => {
             />
           </form>
         ) : (
-          <ShoppingCardTitle variant={variant}>
+          <ShoppingCardTitle variant={variant} className="center gap-2 w-full">
             <div
-              className={`${isDefault ? "cursor-pointer" : ""}`}
+              className={`${isDefault ? "cursor-pointer" : ""} w-full`}
               onClick={() => isDefault && setEdit(!edit)}
             >
               {item.name}
             </div>
+            <Button size="sm" variant="ghost" onClick={() => {}}>
+              <InfoIcon />
+            </Button>
           </ShoppingCardTitle>
         )}
-      </div>
+      </>
       <div className="flex gap-2 w-full">
         <Button size="sm" variant="destructive" onClick={() => {}}>
-          <Trash2 />
+          <Trash />
         </Button>
         <Button variant="outline" size="sm" onClick={() => {}}>
           <Bookmark />
-        </Button>
-        <Button size="sm" onClick={() => {}}>
-          {edit ? <SaveIcon /> : <Edit2Icon />}
         </Button>
       </div>
     </ShoppingCardWrapper>

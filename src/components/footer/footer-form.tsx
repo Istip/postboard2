@@ -3,55 +3,45 @@ import { AnimatePresence, motion } from "motion/react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { PlusCircleIcon } from "lucide-react";
-import { ID, tables } from "@/lib/appwrite";
+import { useShoppingStore } from "@/stores/shopping.store";
 import { useAuthStore } from "@/stores/auth.store";
+import { toast } from "sonner";
 
 interface Props {
   show: boolean;
 }
 
-const databaseId = import.meta.env.VITE_APPWRITE_DATABASE_ID;
-const tableId = import.meta.env.VITE_APP_APPWRITE_SHOPPING_LIST_TABLE_ID;
-
 const FooterForm = ({ show }: Props) => {
-  const [content, setContent] = useState("");
-
+  const [name, setName] = useState("");
   const user = useAuthStore((state) => state.user);
-
-  const data: Shopping = {
-    $id: ID.unique(),
-    $createdAt: new Date().toISOString(),
-    $updatedAt: new Date().toISOString(),
-    name: content,
-    done: false,
-    marked: false,
-    creator: user!.name,
-    creatorId: user!.$id,
-    order: 1,
-  };
+  const createItem = useShoppingStore((state) => state.createItem);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setContent(e.target.value);
+    setName(e.target.value);
   };
 
-  const handleSubmit = (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
-    console.log("Submit:", content);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-    if (content.trim() === "") return;
+    if (name.trim() === "") return;
 
-    tables
-      .createRow({
-        databaseId,
-        tableId,
-        rowId: ID.unique(),
-        data,
-      })
-      .then((response) => {
-        console.log("Row created:", response);
-        setContent("");
-      })
-      .catch((err: unknown) => console.error("Error creating row:", err));
+    try {
+      await createItem({
+        name,
+        done: false,
+        marked: false,
+        creator: user!.name,
+        creatorId: user!.$id,
+        // fetch the list length to determine order
+        order: 1,
+      });
+      setName("");
+      toast.success(`Item created: ${name}`);
+    } catch (error) {
+      toast.error("Error creating item", {
+        description: error instanceof Error ? error.message : String(error),
+      });
+    }
   };
 
   return (
@@ -60,34 +50,15 @@ const FooterForm = ({ show }: Props) => {
         <motion.div
           key="footer-input"
           className="w-full"
-          initial={{
-            opacity: 0,
-            height: 0,
-            marginTop: 0,
-            paddingTop: 0,
-            paddingBottom: 0,
-          }}
-          animate={{
-            opacity: 1,
-            height: "auto",
-            marginTop: 8,
-            paddingTop: 0,
-            paddingBottom: 0,
-          }}
-          exit={{
-            opacity: 0,
-            height: 0,
-            marginTop: 0,
-            paddingTop: 0,
-            paddingBottom: 0,
-          }}
-          transition={{
-            duration: 0.2,
-          }}
+          initial={{ opacity: 0, height: 0, marginTop: 0 }}
+          animate={{ opacity: 1, height: "auto", marginTop: 16 }}
+          exit={{ opacity: 0, height: 0, marginTop: 0 }}
+          transition={{ duration: 0.2 }}
         >
           <form onSubmit={handleSubmit} className="flex w-full gap-2">
             <Input
               type="text"
+              value={name}
               placeholder="Enter your text here..."
               className="w-full"
               autoFocus

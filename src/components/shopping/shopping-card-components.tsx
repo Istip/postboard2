@@ -13,7 +13,7 @@ export const ShoppingCardWrapper = ({
 }) => {
   const variantStyles = {
     default:
-      "p-4 space-y-4 bg-background/50 border border-background backdrop-blur-sm rounded-lg shadow",
+      "p-4 space-y-4 bg-background/50 border dark:border-background border-foreground/15 backdrop-blur-sm rounded-lg shadow",
     marked: "p-4 space-y-4 bg-primary border border-primary rounded-lg",
     done: "p-4 space-y-4 bg-foreground/5 border border-foreground/30 backdrop-blur-xl rounded-lg opacity-30",
   };

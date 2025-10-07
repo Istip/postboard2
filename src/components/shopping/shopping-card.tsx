@@ -7,6 +7,7 @@ import {
   ShoppingCardTitle,
 } from "@/components/shopping/shopping-card-components";
 import { useShoppingStore } from "@/stores/shopping.store";
+import { toast } from "sonner";
 
 interface Props {
   item: Shopping;
@@ -35,6 +36,11 @@ const ShoppingCard = ({ item }: Props) => {
   };
 
   const handleRemove = () => {
+    toast.error(
+      <>
+        Item removed: <strong className="font-black">{item.name}</strong>
+      </>
+    );
     deleteItem(item.$id);
   };
 

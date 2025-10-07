@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Bookmark, InfoIcon, Trash } from "lucide-react";
+import { Bookmark, CheckCircle, InfoIcon, Trash } from "lucide-react";
 import { useState, useMemo } from "react";
 import {
   ShoppingCardWrapper,
@@ -52,13 +52,26 @@ const ShoppingCard = ({ item }: Props) => {
           </ShoppingCardTitle>
         )}
       </>
-      <div className="flex gap-2 w-full">
+      <div className="flex gap-2 w-full justify-between">
         <Button size="sm" variant="destructive" onClick={() => {}}>
           <Trash />
         </Button>
-        <Button variant="outline" size="sm" onClick={() => {}}>
-          <Bookmark />
-        </Button>
+        <div className="space-x-1">
+          <Button
+            variant={item.marked ? "default" : item.done ? "ghost" : "outline"}
+            size="sm"
+            onClick={() => {}}
+          >
+            <Bookmark />
+          </Button>
+          <Button
+            variant={item.done ? "ghost" : item.marked ? "default" : "outline"}
+            size="sm"
+            onClick={() => {}}
+          >
+            <CheckCircle />
+          </Button>
+        </div>
       </div>
     </ShoppingCardWrapper>
   );

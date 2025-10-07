@@ -5,7 +5,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router";
 
 // Pages
 import Authentication from "@/pages/auth";
-import Home from "@/pages/home";
+import ShoppingList from "@/pages/shopping";
 import Tutorial from "@/pages/tutorial";
 import Notes from "@/pages/notes";
 import Private from "@/pages/private";
@@ -30,7 +30,7 @@ export default function App() {
         <Routes>
           <Route path="auth" element={<Authentication />} />
           <Route element={<DashboardLayout />}>
-            <Route index element={<Home />} />
+            <Route index element={<ShoppingList />} />
             <Route path="tutorial" element={<Tutorial />} />
             <Route path="notes" element={<Notes />} />
             <Route path="private" element={<Private />} />

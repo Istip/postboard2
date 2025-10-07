@@ -6,7 +6,9 @@ const Title = ({
   className?: string;
 }) => {
   return (
-    <h1 className={`text-md heading text-primary ${className}`}>{children}</h1>
+    <h1 className={`text-2xl heading text-primary py-4 ${className}`}>
+      {children}
+    </h1>
   );
 };
 

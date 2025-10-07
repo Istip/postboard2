@@ -13,8 +13,11 @@ interface Props {
 
 const FooterForm = ({ show }: Props) => {
   const [name, setName] = useState("");
+
   const user = useAuthStore((state) => state.user);
   const createItem = useShoppingStore((state) => state.createItem);
+
+  const totalCount = useShoppingStore((state) => state.totalCount);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -32,8 +35,8 @@ const FooterForm = ({ show }: Props) => {
         marked: false,
         creator: user!.name,
         creatorId: user!.$id,
-        // fetch the list length to determine order
-        order: 1,
+        // check if totalCount is passed correctly
+        order: totalCount + 1,
       });
       setName("");
       toast.success(`Item created: ${name}`);

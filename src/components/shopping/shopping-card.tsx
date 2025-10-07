@@ -39,7 +39,7 @@ const ShoppingCard = ({ item }: Props) => {
             />
           </form>
         ) : (
-          <ShoppingCardTitle variant={variant} className="center gap-2 w-full">
+          <ShoppingCardTitle variant={variant} className="flex gap-2 w-full">
             <div
               className={`${isDefault ? "cursor-pointer" : ""} w-full`}
               onClick={() => isDefault && setEdit(!edit)}

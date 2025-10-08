@@ -140,7 +140,7 @@ const ShoppingCard = ({ item }: Props) => {
         <Button size="sm" variant="destructive" onClick={handleRemove}>
           <Trash />
         </Button>
-        <div className="space-x-1">
+        <div className="space-x-0 space-y-1 xs:space-y-0 xs:space-x-1 flex flex-wrap w-full justify-end">
           <Button
             variant={item.marked ? "default" : item.done ? "ghost" : "outline"}
             size="sm"

@@ -33,6 +33,11 @@ const FooterForm = ({ show }: Props) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (name.length > 24) {
+      toast.warning("Item name is too long.");
+      return;
+    }
+
     if (nameExists) {
       toast.warning(
         <>

@@ -13,6 +13,7 @@ const ShoppingList = () => {
   const loading = useShoppingStore((state) => state.loading);
 
   const markedItems = items.filter((item) => item.marked);
+  const unmarkedItems = items.filter((item) => !item.marked);
 
   useEffect(() => {
     fetchItems();
@@ -38,8 +39,8 @@ const ShoppingList = () => {
           <>
             <h2 className="mb-2 font-semibold text-lg heading">All items</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
-              {items?.length > 0 &&
-                items.map((item) => (
+              {unmarkedItems?.length > 0 &&
+                unmarkedItems.map((item) => (
                   <ShoppingCard key={item.$id} item={item} />
                 ))}
             </div>

@@ -13,9 +13,9 @@ export const ShoppingCardWrapper = ({
 }) => {
   const variantStyles = {
     default:
-      "p-4 space-y-4 bg-background/50 border dark:border-background border-foreground/15 backdrop-blur-sm rounded-lg shadow",
-    marked: "p-4 space-y-4 bg-primary border border-primary rounded-lg",
-    done: "p-4 space-y-4 bg-foreground/5 border border-foreground/30 backdrop-blur-xl rounded-lg opacity-30",
+      "p-2 space-y-4 bg-background/50 border dark:border-background border-foreground/15 backdrop-blur-sm rounded-xl shadow",
+    marked: "p-2 space-y-4 bg-primary border border-primary rounded-xl",
+    done: "p-2 space-y-4 bg-foreground/5 border border-dashed border-foreground/30 backdrop-blur-xl rounded-xl opacity-30",
   };
 
   return (

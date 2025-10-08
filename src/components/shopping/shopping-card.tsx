@@ -108,7 +108,7 @@ const ShoppingCard = ({ item }: Props) => {
     >
       <>
         {edit ? (
-          <form onSubmit={handleUpdate} className="w-full gap-2 flex">
+          <form onSubmit={handleUpdate} className="w-full gap-1 flex">
             <Input
               ref={inputRef}
               value={value}
@@ -121,7 +121,7 @@ const ShoppingCard = ({ item }: Props) => {
             </Button>
           </form>
         ) : (
-          <ShoppingCardTitle variant={variant} className="flex gap-2 w-full">
+          <ShoppingCardTitle variant={variant} className="flex gap-1 w-full">
             <div
               className={`${
                 isDefault ? "cursor-pointer" : ""

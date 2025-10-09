@@ -5,7 +5,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { useShoppingStore } from "@/stores/shopping.store";
-import { StarIcon, Trash2Icon } from "lucide-react";
+import { CircleCheck, StarIcon, Trash2Icon } from "lucide-react";
 import { toast } from "sonner";
 
 interface Props {
@@ -32,15 +32,22 @@ const ShoppingCarousel = ({ items }: Props) => {
     });
   };
 
+  const handleDone = ({ item }: { item: Shopping }) => {
+    updateItem(item.$id, {
+      done: !item.done,
+      marked: item.marked ? false : item.marked,
+    });
+  };
+
   return (
     <Carousel opts={{ align: "start", loop: true }} className="w-full">
       <CarouselContent className="-ml-2 mx-0">
         {items?.map((item) => (
           <CarouselItem
             key={item.$id}
-            className="basis-1/3 md:basis-1/4 lg:basis-1/5 text-center flex w-full text-background pl-2"
+            className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 text-center flex w-full text-background pl-2"
           >
-            <div className="border border-primary rounded-xl p-2 w-full flex flex-col items-center bg-primary/60 font-medium backdrop-blur-sm text-sm justify-between gap-2">
+            <div className="border border-primary rounded-xl p-2 w-full flex flex-col items-center bg-primary/60 font-medium backdrop-blur-sm text-base justify-between gap-2">
               <p>{item.name}</p>
               <div className="flex gap-2 w-full">
                 <Button
@@ -53,10 +60,18 @@ const ShoppingCarousel = ({ items }: Props) => {
                 </Button>
                 <Button
                   size="sm"
-                  className="flex flex-2"
+                  className="flex flex-1"
                   onClick={() => handleUnmark({ item })}
                 >
                   <StarIcon />
+                </Button>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="flex flex-1"
+                  onClick={() => handleDone({ item })}
+                >
+                  <CircleCheck />
                 </Button>
               </div>
             </div>

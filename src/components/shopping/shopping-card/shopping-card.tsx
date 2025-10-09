@@ -9,6 +9,13 @@ import {
 import { useShoppingStore } from "@/stores/shopping.store";
 import { toast } from "sonner";
 import { ButtonGroup } from "@/components/ui/button-group";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 interface Props {
   item: Shopping;
@@ -131,9 +138,25 @@ const ShoppingCard = ({ item }: Props) => {
             >
               {item.name}
             </div>
-            <Button size="sm" variant="ghost" onClick={() => console.log(item)}>
-              <InfoIcon />
-            </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => console.log(item)}
+                >
+                  <InfoIcon />
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogTitle>{item.name}</DialogTitle>
+                <DialogDescription asChild>
+                  <p>
+                    Created by: <b>{item.creator}</b>
+                  </p>
+                </DialogDescription>
+              </DialogContent>
+            </Dialog>
           </ShoppingCardTitle>
         )}
       </>

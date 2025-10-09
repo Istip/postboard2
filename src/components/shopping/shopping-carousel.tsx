@@ -21,7 +21,7 @@ const ShoppingCarousel = ({ items }: Props) => {
           >
             <motion.div
               className="w-full h-full flex"
-              whileTap={{ cursor: "grabbing", scale: 0.9 }}
+              whileTap={{ cursor: "grabbing", scale: 0.95 }}
             >
               <ShoppingCard item={item} />
             </motion.div>

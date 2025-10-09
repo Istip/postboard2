@@ -117,7 +117,7 @@ const ShoppingCard = ({ item }: Props) => {
               onChange={handleChange}
               onKeyDown={handleKeyDown}
             />
-            <Button size="sm" variant="ghost">
+            <Button size="sm" variant="ghost" type="submit">
               <Edit />
             </Button>
           </form>

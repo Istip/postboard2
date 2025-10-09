@@ -104,7 +104,7 @@ const ShoppingCard = ({ item }: Props) => {
   return (
     <ShoppingCardWrapper
       variant={variant}
-      className="flex flex-col justify-between"
+      className="flex flex-col justify-between h-full w-full"
     >
       <>
         {edit ? (
@@ -142,7 +142,7 @@ const ShoppingCard = ({ item }: Props) => {
         </Button>
         <div className="space-x-0 space-y-1 xs:space-y-0 xs:space-x-1 flex flex-wrap w-full justify-end">
           <Button
-            variant={item.marked ? "default" : item.done ? "ghost" : "outline"}
+            variant={item.marked ? "ghost" : item.done ? "ghost" : "outline"}
             size="sm"
             onClick={handleMarked}
           >

@@ -40,7 +40,7 @@ const ShoppingCarousel = ({ items }: Props) => {
             key={item.$id}
             className="basis-1/3 md:basis-1/4 lg:basis-1/5 text-center flex w-full text-background pl-2"
           >
-            <div className="border border-primary rounded-xl p-2 w-full flex flex-col items-center bg-primary/70 text-sm justify-between gap-2">
+            <div className="border border-primary rounded-xl p-2 w-full flex flex-col items-center bg-primary/60 font-medium backdrop-blur-sm text-sm justify-between gap-2">
               <p>{item.name}</p>
               <div className="flex gap-2 w-full">
                 <Button

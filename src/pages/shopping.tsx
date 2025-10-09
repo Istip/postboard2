@@ -1,19 +1,31 @@
+import { useEffect } from "react";
 import BackgroundPage from "@/components/helpers/background-page";
-import ShoppingCard from "@/components/shopping/shopping-card";
-import ShoppingCardSkeletons from "@/components/shopping/shopping-card-skeletons";
-import ShoppingCarousel from "@/components/shopping/shopping-carousel";
+import ShoppingCardSkeletons from "@/components/shopping/shopping-card/shopping-card-skeletons";
+import ReadyItems from "@/components/shopping/shopping-views/ready-items";
 import Title from "@/components/ui/title";
+import { Button } from "@/components/ui/button";
 import { backgrounds } from "@/lib/backgrounds";
 import { useShoppingStore } from "@/stores/shopping.store";
-import { useEffect } from "react";
+import { useShoppingViewStore } from "@/stores/shpoppingview.store";
+import { LayoutGrid, LayoutPanelTop } from "lucide-react";
+import MarkedItems from "@/components/shopping/shopping-views/marked-items";
+import DoneItems from "@/components/shopping/shopping-views/done-items";
+import MixedItems from "@/components/shopping/shopping-views/mixed-items";
 
 const ShoppingList = () => {
   const fetchItems = useShoppingStore((state) => state.fetchItems);
   const items = useShoppingStore((state) => state.items);
   const loading = useShoppingStore((state) => state.loading);
 
+  const view = useShoppingViewStore((state) => state.view);
+  const setView = useShoppingViewStore((state) => state.setView);
+
+  const isGroupedView = view === "grouped";
+  const handleView = () => setView(isGroupedView ? "mixed" : "grouped");
+
+  const readyItems = items.filter((item) => !item.marked && !item.done);
   const markedItems = items.filter((item) => item.marked);
-  const unmarkedItems = items.filter((item) => !item.marked);
+  const doneItems = items.filter((item) => item.done);
 
   useEffect(() => {
     fetchItems();
@@ -22,28 +34,27 @@ const ShoppingList = () => {
 
   return (
     <BackgroundPage background={backgrounds.shopping}>
-      <Title className="mb-2">Shopping list</Title>
+      <div className="flex items-center justify-between mb-2">
+        <Title>Shopping list</Title>
+        <Button size="icon" onClick={handleView}>
+          {isGroupedView ? <LayoutPanelTop /> : <LayoutGrid />}
+        </Button>
+      </div>
       {loading ? (
         <ShoppingCardSkeletons />
       ) : (
         <>
           {items?.length === 0 && <div>Your shopping list is empty.</div>}
-          {markedItems?.length > 0 && (
-            <div className="mb-4">
-              <h2 className="mb-2 font-semibold text-lg heading">
-                Marked items
-              </h2>
-              <ShoppingCarousel items={markedItems} />
-            </div>
-          )}
           <>
-            <h2 className="mb-2 font-semibold text-lg heading">All items</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
-              {unmarkedItems?.length > 0 &&
-                unmarkedItems.map((item) => (
-                  <ShoppingCard key={item.$id} item={item} />
-                ))}
-            </div>
+            {isGroupedView ? (
+              <>
+                <MarkedItems items={markedItems} />
+                <ReadyItems items={readyItems} />
+                <DoneItems items={doneItems} />
+              </>
+            ) : (
+              <MixedItems items={items} />
+            )}
           </>
         </>
       )}

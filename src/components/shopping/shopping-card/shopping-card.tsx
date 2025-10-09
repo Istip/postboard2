@@ -149,7 +149,7 @@ const ShoppingCard = ({ item }: Props) => {
                 </Button>
               </DialogTrigger>
               <DialogContent>
-                <DialogTitle>{item.name}</DialogTitle>
+                <DialogTitle className="capitalize">{item.name}</DialogTitle>
                 <DialogDescription asChild>
                   <p>
                     Created by: <b>{item.creator}</b>

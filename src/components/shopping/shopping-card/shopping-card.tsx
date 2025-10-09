@@ -36,6 +36,11 @@ const ShoppingCard = ({ item }: Props) => {
     e.preventDefault();
 
     if (value.trim() && value !== item.name) {
+      if (value.length > 24) {
+        toast.warning("Item name is too long.");
+        return;
+      }
+
       updateItem(item.$id, { name: value.trim() });
     } else {
       setValue(item.name);

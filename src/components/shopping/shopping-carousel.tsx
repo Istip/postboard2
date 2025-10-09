@@ -13,7 +13,7 @@ interface Props {
 const ShoppingCarousel = ({ items }: Props) => {
   return (
     <Carousel opts={{ align: "start", loop: true }} className="w-full">
-      <CarouselContent className="mx-0 py-4">
+      <CarouselContent className="mx-0">
         {items?.map((item) => (
           <CarouselItem
             key={item.$id}

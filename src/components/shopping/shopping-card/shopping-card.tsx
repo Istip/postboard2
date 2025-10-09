@@ -144,7 +144,7 @@ const ShoppingCard = ({ item }: Props) => {
         <ButtonGroup>
           <Button
             className={`${item.marked ? "text-background" : ""}`}
-            variant={item.marked ? "ghost" : item.done ? "ghost" : "outline"}
+            variant={item.marked ? "outline" : item.done ? "ghost" : "outline"}
             size="sm"
             onClick={handleMarked}
           >

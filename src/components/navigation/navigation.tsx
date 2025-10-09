@@ -11,6 +11,11 @@ import {
 import Logo from "@/components/navigation/logo";
 import Divider from "@/components/helpers/divider";
 import { Link } from "react-router";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const Navigation = () => {
   const user = useAuthStore((state) => state.user);
@@ -29,11 +34,16 @@ const Navigation = () => {
       <Logo />
       {user && (
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Avatar className="cursor-pointer">
-              <AvatarImage src="" alt={user.name} />
-              <AvatarFallback>{initials(user.name)}</AvatarFallback>
-            </Avatar>
+          <DropdownMenuTrigger>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Avatar className="cursor-pointer">
+                  <AvatarImage src="" alt={user.name} />
+                  <AvatarFallback>{initials(user.name)}</AvatarFallback>
+                </Avatar>
+              </TooltipTrigger>
+              <TooltipContent>Click to open the Menu</TooltipContent>
+            </Tooltip>
           </DropdownMenuTrigger>
 
           <DropdownMenuContent className="p-2 mr-2 text-center">

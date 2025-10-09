@@ -35,9 +35,7 @@ const ShoppingList = () => {
       ) : (
         <>
           {items?.length === 0 && (
-            <div className="my-2 text-center w-screen h-screen">
-              Your shopping list is empty.
-            </div>
+            <div className="my-2 text-center">Your shopping list is empty.</div>
           )}
           <ShoppingTitle isGroupedView={isGroupedView} />
           {isGroupedView ? (

@@ -5,7 +5,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { useShoppingStore } from "@/stores/shopping.store";
-import { BookmarkMinusIcon, Trash2Icon } from "lucide-react";
+import { StarIcon, Trash2Icon } from "lucide-react";
 import { toast } from "sonner";
 
 interface Props {
@@ -56,7 +56,7 @@ const ShoppingCarousel = ({ items }: Props) => {
                   className="flex flex-2"
                   onClick={() => handleUnmark({ item })}
                 >
-                  <BookmarkMinusIcon />
+                  <StarIcon />
                 </Button>
               </div>
             </div>

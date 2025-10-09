@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Bookmark, CheckCircle, Edit, InfoIcon, Trash } from "lucide-react";
+import { CheckCircle, Edit, InfoIcon, StarIcon, Trash } from "lucide-react";
 import { useState, useMemo, useRef, useEffect } from "react";
 import {
   ShoppingCardWrapper,
@@ -146,7 +146,7 @@ const ShoppingCard = ({ item }: Props) => {
             size="sm"
             onClick={handleMarked}
           >
-            <Bookmark />
+            <StarIcon />
           </Button>
           <Button
             variant={

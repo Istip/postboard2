@@ -1,4 +1,4 @@
-import ShoppingCard from "@/components/shopping/shopping-card";
+import ShoppingCard from "@/components/shopping/shopping-card/shopping-card";
 
 interface Props {
   items: Shopping[];

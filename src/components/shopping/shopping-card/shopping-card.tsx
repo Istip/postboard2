@@ -142,6 +142,7 @@ const ShoppingCard = ({ item }: Props) => {
         </Button>
         <div className="space-x-0 space-y-1 xs:space-y-0 xs:space-x-1 flex flex-wrap w-full justify-end">
           <Button
+            className={`${item.marked ? "text-background" : ""}`}
             variant={item.marked ? "ghost" : item.done ? "ghost" : "outline"}
             size="sm"
             onClick={handleMarked}

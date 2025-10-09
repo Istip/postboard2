@@ -8,6 +8,7 @@ import {
 } from "@/components/shopping/shopping-card/shopping-card-components";
 import { useShoppingStore } from "@/stores/shopping.store";
 import { toast } from "sonner";
+import { ButtonGroup } from "@/components/ui/button-group";
 
 interface Props {
   item: Shopping;
@@ -140,7 +141,7 @@ const ShoppingCard = ({ item }: Props) => {
         <Button size="sm" variant="destructive" onClick={handleRemove}>
           <Trash />
         </Button>
-        <div className="space-x-1 space-y-1 xs:space-y-0 xs:space-x-1 flex flex-wrap w-full justify-end">
+        <ButtonGroup>
           <Button
             className={`${item.marked ? "text-background" : ""}`}
             variant={item.marked ? "ghost" : item.done ? "ghost" : "outline"}
@@ -158,7 +159,7 @@ const ShoppingCard = ({ item }: Props) => {
           >
             <CheckCircle />
           </Button>
-        </div>
+        </ButtonGroup>
       </div>
     </ShoppingCardWrapper>
   );

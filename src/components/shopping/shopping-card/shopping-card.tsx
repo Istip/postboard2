@@ -1,7 +1,7 @@
+import { useState, useMemo, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CheckCircle, Edit, InfoIcon, StarIcon, Trash } from "lucide-react";
-import { useState, useMemo, useRef, useEffect } from "react";
 import {
   ShoppingCardWrapper,
   ShoppingCardTitle,
@@ -9,13 +9,9 @@ import {
 import { useShoppingStore } from "@/stores/shopping.store";
 import { toast } from "sonner";
 import { ButtonGroup } from "@/components/ui/button-group";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { useAnimatedDialog } from "@/components/ui/animated-dialog";
+import { motion } from "motion/react";
+import ShoppingCardDialog from "@/components/shopping/shopping-card-dialog";
 
 interface Props {
   item: Shopping;
@@ -31,6 +27,22 @@ const ShoppingCard = ({ item }: Props) => {
 
   const deleteItem = useShoppingStore((state) => state.deleteItem);
   const updateItem = useShoppingStore((state) => state.updateItem);
+  const { openDialog } = useAnimatedDialog();
+
+  const handleInfoClick = () => {
+    const style = () => {
+      if (item.done)
+        return "bg-secondary border border-foreground/50 border-dashed border-text";
+      if (item.marked) return "bg-primary text-background";
+      return "bg-background text-foreground";
+    };
+
+    openDialog(
+      `shopping-card-${item.$id}`,
+      <ShoppingCardDialog item={item} />,
+      style()
+    );
+  };
 
   const handleUpdate = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -75,6 +87,12 @@ const ShoppingCard = ({ item }: Props) => {
     setValue(e.target.value);
   };
 
+  const handleToggleEdit = () => {
+    if (isDefault) {
+      setEdit(true);
+    }
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Escape") {
       setValue(item.name);
@@ -115,81 +133,72 @@ const ShoppingCard = ({ item }: Props) => {
   }, [edit, value, item.name, item.$id, updateItem]);
 
   return (
-    <ShoppingCardWrapper
-      variant={variant}
-      className="flex flex-col justify-between h-full w-full"
+    <motion.div
+      layoutId={`shopping-card-${item.$id}`}
+      className="h-full w-full"
     >
-      <>
-        {edit ? (
-          <form onSubmit={handleUpdate} className="w-full gap-1 flex">
-            <Input
-              ref={inputRef}
-              value={value}
-              autoFocus
-              onChange={handleChange}
-              onKeyDown={handleKeyDown}
-            />
-            <Button size="sm" variant="ghost" type="submit">
-              <Edit />
-            </Button>
-          </form>
-        ) : (
-          <ShoppingCardTitle variant={variant} className="flex gap-1 w-full">
-            <div
-              className={`${
-                isDefault ? "cursor-pointer" : ""
-              } w-full my-auto leading-5`}
-              onClick={() => isDefault && setEdit(true)}
+      <ShoppingCardWrapper
+        variant={variant}
+        className="flex flex-col justify-between h-full w-full"
+      >
+        <>
+          {edit ? (
+            <form onSubmit={handleUpdate} className="w-full gap-1 flex">
+              <Input
+                ref={inputRef}
+                value={value}
+                autoFocus
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+              />
+              <Button size="sm" variant="ghost" type="submit">
+                <Edit />
+              </Button>
+            </form>
+          ) : (
+            <ShoppingCardTitle variant={variant} className="flex gap-1 w-full">
+              <div
+                className={`${
+                  isDefault ? "cursor-pointer" : ""
+                } w-full my-auto leading-5`}
+                onClick={handleToggleEdit}
+              >
+                {item.name}
+              </div>
+              <Button size="sm" variant="ghost" onClick={handleInfoClick}>
+                <InfoIcon />
+              </Button>
+            </ShoppingCardTitle>
+          )}
+        </>
+        <div className="flex gap-2 w-full justify-between">
+          <Button size="sm" variant="destructive" onClick={handleRemove}>
+            <Trash />
+          </Button>
+          <ButtonGroup>
+            <Button
+              className={`${item.marked ? "text-background" : ""}`}
+              variant={
+                item.marked ? "outline" : item.done ? "ghost" : "outline"
+              }
+              size="sm"
+              onClick={handleMarked}
             >
-              {item.name}
-            </div>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={() => console.log(item)}
-                >
-                  <InfoIcon />
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogTitle className="capitalize">{item.name}</DialogTitle>
-                <DialogDescription asChild>
-                  <p>
-                    Created by: <b>{item.creator}</b>
-                  </p>
-                </DialogDescription>
-              </DialogContent>
-            </Dialog>
-          </ShoppingCardTitle>
-        )}
-      </>
-      <div className="flex gap-2 w-full justify-between">
-        <Button size="sm" variant="destructive" onClick={handleRemove}>
-          <Trash />
-        </Button>
-        <ButtonGroup>
-          <Button
-            className={`${item.marked ? "text-background" : ""}`}
-            variant={item.marked ? "outline" : item.done ? "ghost" : "outline"}
-            size="sm"
-            onClick={handleMarked}
-          >
-            <StarIcon />
-          </Button>
-          <Button
-            variant={
-              item.done ? "ghost" : item.marked ? "default" : "secondary"
-            }
-            size="sm"
-            onClick={handleDone}
-          >
-            <CheckCircle />
-          </Button>
-        </ButtonGroup>
-      </div>
-    </ShoppingCardWrapper>
+              <StarIcon />
+            </Button>
+            <Button
+              variant={
+                item.done ? "ghost" : item.marked ? "default" : "secondary"
+              }
+              size="sm"
+              onClick={handleDone}
+            >
+              <CheckCircle />
+            </Button>
+          </ButtonGroup>
+        </div>
+      </ShoppingCardWrapper>
+    </motion.div>
   );
 };
 

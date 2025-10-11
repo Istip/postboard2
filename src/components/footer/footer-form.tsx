@@ -18,12 +18,6 @@ const FooterForm = ({ show }: Props) => {
   const createItem = useShoppingStore((state) => state.createItem);
 
   const items = useShoppingStore((state) => state.items);
-
-  // check if any item.name from items contains the current name (case insensitive)
-  const nameExists = items?.some(
-    (item) => item.name.toLowerCase() === name.toLowerCase()
-  );
-
   const totalCount = useShoppingStore((state) => state.totalCount);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,34 +27,57 @@ const FooterForm = ({ show }: Props) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (name.length > 24) {
-      toast.warning("Item name is too long.");
+    const itemNames = name
+      .split(",")
+      .map((item) => item.trim())
+      .filter((item) => item.length > 0);
+
+    const tooLongItems = itemNames.filter((item) => item.length > 24);
+    if (tooLongItems.length > 0) {
+      toast.warning(`Item name is too long: ${tooLongItems[0]}`);
       return;
     }
 
-    if (nameExists) {
+    // Check for existing items
+    const existingItems = itemNames.filter((itemName) =>
+      items?.some((item) => item.name.toLowerCase() === itemName.toLowerCase())
+    );
+
+    if (existingItems.length > 0) {
       toast.warning(
         <>
-          The item <strong className="font-black">{name}</strong> is already in
-          your shopping list.
+          {existingItems.length === 1 ? "Item" : "Items"} already exist:{" "}
+          <strong className="font-black">{existingItems.join(", ")}</strong>
         </>
       );
       return;
     }
 
     try {
-      await createItem({
-        name: name.trim(),
-        done: false,
-        marked: false,
-        creator: user!.name,
-        creatorId: user!.$id,
-        order: totalCount + 1,
-      });
+      // Create each item individually
+      const promises = itemNames.map((itemName, index) =>
+        createItem({
+          name: itemName,
+          done: false,
+          marked: false,
+          creator: user!.name,
+          creatorId: user!.$id,
+          order: totalCount + index + 1,
+        })
+      );
+
+      await Promise.all(promises);
       setName("");
-      toast.success(`Item created: ${name}`);
+
+      if (itemNames.length === 1) {
+        toast.success(`Item created: ${itemNames[0]}`);
+      } else {
+        toast.success(
+          `${itemNames.length} items created: ${itemNames.join(", ")}`
+        );
+      }
     } catch (error) {
-      toast.error("Error creating item", {
+      toast.error("Error creating items", {
         description: error instanceof Error ? error.message : String(error),
       });
     }

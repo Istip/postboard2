@@ -165,8 +165,15 @@ const ShoppingCard = ({ item }: Props) => {
               >
                 {item.name}
               </div>
-              <Button size="sm" variant="ghost" onClick={handleInfoClick}>
-                <InfoIcon />
+              <Button
+                className={`${item.marked ? "text-background" : ""}`}
+                variant={
+                  item.marked ? "outline" : item.done ? "ghost" : "outline"
+                }
+                size="sm"
+                onClick={handleMarked}
+              >
+                <StarIcon />
               </Button>
             </ShoppingCardTitle>
           )}
@@ -176,15 +183,8 @@ const ShoppingCard = ({ item }: Props) => {
             <Trash />
           </Button>
           <ButtonGroup>
-            <Button
-              className={`${item.marked ? "text-background" : ""}`}
-              variant={
-                item.marked ? "outline" : item.done ? "ghost" : "outline"
-              }
-              size="sm"
-              onClick={handleMarked}
-            >
-              <StarIcon />
+            <Button size="sm" variant="ghost" onClick={handleInfoClick}>
+              <InfoIcon />
             </Button>
             <Button
               variant={

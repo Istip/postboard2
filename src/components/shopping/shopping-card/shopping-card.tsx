@@ -32,7 +32,7 @@ const ShoppingCard = ({ item }: Props) => {
   const handleInfoClick = () => {
     const style = () => {
       if (item.done)
-        return "bg-secondary border border-foreground/50 border-dashed border-text";
+        return "bg-secondary/70 border border-foreground/50 border-dashed border-text";
       if (item.marked) return "bg-primary text-background";
       return "bg-background text-foreground";
     };

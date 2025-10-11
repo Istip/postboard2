@@ -100,7 +100,7 @@ const AnimatedDialogPortal = ({
           {/* Dialog Content */}
           <motion.div
             layoutId={layoutId}
-            className={`relative w-full max-w-lg m-4 bg-background rounded-xl shadow-2xl p-4 ${className}`}
+            className={`relative w-full max-w-lg m-4 rounded-xl shadow-2xl p-4 ${className}`}
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
             exit={{ scale: 0.8 }}

@@ -17,11 +17,6 @@ const ShoppingCardDialog = ({ item }: Props) => {
 
   const updateItem = useShoppingStore((state) => state.updateItem);
 
-  // Sync local state when item prop changes
-  useEffect(() => {
-    setDescription(item.description || "");
-  }, [item.description]);
-
   const list = [
     { label: item.creator, value: "Created by", icon: <CircleUser /> },
     {
@@ -33,10 +28,9 @@ const ShoppingCardDialog = ({ item }: Props) => {
 
   const handleSave = async () => {
     const trimmedDescription = description.trim();
-    const originalDescription = item.description || "";
 
-    // Don't make API call if description hasn't actually changed
-    if (trimmedDescription === originalDescription) {
+    // Use the same logic as isDescriptionModified
+    if (!isDescriptionModified()) {
       setIsEditing(false);
       return;
     }
@@ -54,17 +48,34 @@ const ShoppingCardDialog = ({ item }: Props) => {
     }
   };
 
+  const handleDescriptionChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setDescription(e.target.value);
+  };
+
   const handleCancel = () => {
     setDescription(item.description || "");
     setIsEditing(false);
   };
 
-  // Check if description has been modified
   const isDescriptionModified = () => {
     const trimmedDescription = description.trim();
-    const originalDescription = item.description || "";
-    return trimmedDescription !== originalDescription;
+    const originalDescription = item.description; // Don't fallback to empty string
+
+    // If original was null/undefined and new is empty, no change
+    if (!originalDescription && !trimmedDescription) {
+      return false;
+    }
+
+    // If original exists and new is different (including empty), it's a change
+    // If original doesn't exist and new has content, it's a change
+    return trimmedDescription !== (originalDescription || "");
   };
+
+  useEffect(() => {
+    setDescription(item.description || "");
+  }, [item.description]);
 
   return (
     <>
@@ -120,7 +131,7 @@ const ShoppingCardDialog = ({ item }: Props) => {
         {isEditing ? (
           <Textarea
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={handleDescriptionChange}
             placeholder="Add a description..."
             className="min-h-20 resize-none"
             disabled={isLoading}

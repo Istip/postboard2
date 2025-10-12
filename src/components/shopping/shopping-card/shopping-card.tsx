@@ -166,7 +166,9 @@ const ShoppingCard = ({ item }: Props) => {
                 {item.name}
               </div>
               <Button
-                className={`${item.marked ? "text-background" : ""}`}
+                className={`${
+                  item.marked ? "text-primary dark:text-background" : ""
+                }`}
                 variant={
                   item.marked ? "outline" : item.done ? "ghost" : "outline"
                 }
@@ -183,7 +185,12 @@ const ShoppingCard = ({ item }: Props) => {
             <Trash />
           </Button>
           <ButtonGroup>
-            <Button size="sm" variant="ghost" onClick={handleInfoClick}>
+            <Button
+              size="sm"
+              className={item.marked ? "text-background" : ""}
+              variant="ghost"
+              onClick={handleInfoClick}
+            >
               <InfoIcon />
             </Button>
             <Button

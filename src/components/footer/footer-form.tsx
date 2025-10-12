@@ -74,7 +74,7 @@ const FooterForm = ({ show }: Props) => {
           creator: user!.name,
           creatorId: user!.$id,
           order: totalCount + index + 1,
-          description: "szia",
+          description: "",
         })
       );
 

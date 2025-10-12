@@ -1,10 +1,10 @@
-import { ShoppingBasketIcon } from "lucide-react";
+import { Frown } from "lucide-react";
 import { Link } from "react-router";
 
 const ShoppingEmpty = () => {
   return (
     <div className="space-y-1 text-center">
-      <ShoppingBasketIcon
+      <Frown
         className="mx-auto mb-4 p-4 rounded-xl bg-secondary text-foreground"
         size={64}
       />

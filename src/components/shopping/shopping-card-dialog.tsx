@@ -20,7 +20,10 @@ const ShoppingCardDialog = ({ item }: Props) => {
   const list = [
     { label: item.creator, value: "Created by", icon: <CircleUser /> },
     {
-      label: new Date(item.$createdAt).toLocaleDateString(),
+      label: new Date(item.$createdAt).toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+      }),
       value: "Date",
       icon: <Calendar />,
     },

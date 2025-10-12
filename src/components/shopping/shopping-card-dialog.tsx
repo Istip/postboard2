@@ -92,7 +92,7 @@ const ShoppingCardDialog = ({ item }: Props) => {
           <span className="text-right font-semibold text-sm">{data.label}</span>
         </div>
       ))}
-      <Divider>More</Divider>
+      <Divider>MORE</Divider>
       <>
         <div className="flex items-center justify-between mb-2">
           <h4 className="text-sm font-medium">Description:</h4>

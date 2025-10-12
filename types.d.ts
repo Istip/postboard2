@@ -9,6 +9,7 @@ declare global {
     creator: string;
     creatorId: string;
     order: number;
+    description?: string;
   }
 }
 

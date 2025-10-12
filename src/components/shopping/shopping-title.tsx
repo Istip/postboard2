@@ -10,9 +10,10 @@ import {
 
 interface Props {
   isGroupedView: boolean;
+  emptyBasket: boolean;
 }
 
-const ShoppingTitle = ({ isGroupedView }: Props) => {
+const ShoppingTitle = ({ isGroupedView, emptyBasket }: Props) => {
   const setView = useShoppingViewStore((state) => state.setView);
 
   const handleView = () => setView(isGroupedView ? "mixed" : "grouped");
@@ -22,7 +23,7 @@ const ShoppingTitle = ({ isGroupedView }: Props) => {
       <Title>Shopping list</Title>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button size="icon" onClick={handleView}>
+          <Button size="icon" onClick={handleView} disabled={emptyBasket}>
             {isGroupedView ? <LayoutGrid /> : <LayoutPanelTop />}
           </Button>
         </TooltipTrigger>

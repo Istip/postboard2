@@ -22,6 +22,8 @@ const ShoppingList = () => {
   const markedItems = items.filter((item) => item.marked);
   const doneItems = items.filter((item) => item.done);
 
+  const emptyBasket = items?.length === 0;
+
   useEffect(() => {
     fetchItems();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -29,8 +31,8 @@ const ShoppingList = () => {
 
   return (
     <BackgroundPage background={backgrounds.shopping}>
-      <ShoppingTitle isGroupedView={isGroupedView} />
-      {items?.length === 0 && <ShoppingEmpty />}
+      <ShoppingTitle isGroupedView={isGroupedView} emptyBasket={emptyBasket} />
+      {emptyBasket && <ShoppingEmpty />}
       {isGroupedView ? (
         <>
           <MarkedItems items={markedItems} />

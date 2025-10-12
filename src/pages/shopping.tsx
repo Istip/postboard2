@@ -8,6 +8,7 @@ import MarkedItems from "@/components/shopping/shopping-views/marked-items";
 import DoneItems from "@/components/shopping/shopping-views/done-items";
 import MixedItems from "@/components/shopping/shopping-views/mixed-items";
 import ShoppingTitle from "@/components/shopping/shopping-title";
+import ShoppingEmpty from "@/components/shopping/shopping-empty";
 
 const ShoppingList = () => {
   const fetchItems = useShoppingStore((state) => state.fetchItems);
@@ -28,21 +29,17 @@ const ShoppingList = () => {
 
   return (
     <BackgroundPage background={backgrounds.shopping}>
-      <>
-        {items?.length === 0 && (
-          <div className="my-2 text-center">Your shopping list is empty.</div>
-        )}
-        <ShoppingTitle isGroupedView={isGroupedView} />
-        {isGroupedView ? (
-          <>
-            <MarkedItems items={markedItems} />
-            <ReadyItems items={readyItems} />
-            <DoneItems items={doneItems} />
-          </>
-        ) : (
-          <MixedItems items={items} />
-        )}
-      </>
+      <ShoppingTitle isGroupedView={isGroupedView} />
+      {items?.length === 0 && <ShoppingEmpty />}
+      {isGroupedView ? (
+        <>
+          <MarkedItems items={markedItems} />
+          <ReadyItems items={readyItems} />
+          <DoneItems items={doneItems} />
+        </>
+      ) : (
+        <MixedItems items={items} />
+      )}
     </BackgroundPage>
   );
 };

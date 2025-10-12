@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import BackgroundPage from "@/components/helpers/background-page";
-import ShoppingCardSkeletons from "@/components/shopping/shopping-card/shopping-card-skeletons";
 import ReadyItems from "@/components/shopping/shopping-views/ready-items";
 import { backgrounds } from "@/lib/backgrounds";
 import { useShoppingStore } from "@/stores/shopping.store";
@@ -13,7 +12,6 @@ import ShoppingTitle from "@/components/shopping/shopping-title";
 const ShoppingList = () => {
   const fetchItems = useShoppingStore((state) => state.fetchItems);
   const items = useShoppingStore((state) => state.items);
-  const loading = useShoppingStore((state) => state.loading);
 
   const view = useShoppingViewStore((state) => state.view);
 
@@ -30,25 +28,21 @@ const ShoppingList = () => {
 
   return (
     <BackgroundPage background={backgrounds.shopping}>
-      {loading ? (
-        <ShoppingCardSkeletons />
-      ) : (
-        <>
-          {items?.length === 0 && (
-            <div className="my-2 text-center">Your shopping list is empty.</div>
-          )}
-          <ShoppingTitle isGroupedView={isGroupedView} />
-          {isGroupedView ? (
-            <>
-              <MarkedItems items={markedItems} />
-              <ReadyItems items={readyItems} />
-              <DoneItems items={doneItems} />
-            </>
-          ) : (
-            <MixedItems items={items} />
-          )}
-        </>
-      )}
+      <>
+        {items?.length === 0 && (
+          <div className="my-2 text-center">Your shopping list is empty.</div>
+        )}
+        <ShoppingTitle isGroupedView={isGroupedView} />
+        {isGroupedView ? (
+          <>
+            <MarkedItems items={markedItems} />
+            <ReadyItems items={readyItems} />
+            <DoneItems items={doneItems} />
+          </>
+        ) : (
+          <MixedItems items={items} />
+        )}
+      </>
     </BackgroundPage>
   );
 };

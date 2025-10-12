@@ -2,10 +2,16 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { PlusCircleIcon } from "lucide-react";
+import { PlusCircleIcon, StarIcon } from "lucide-react";
 import { useShoppingStore } from "@/stores/shopping.store";
 import { useAuthStore } from "@/stores/auth.store";
 import { toast } from "sonner";
+import { Toggle } from "@/components/ui/toggle";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface Props {
   show: boolean;
@@ -13,6 +19,7 @@ interface Props {
 
 const FooterForm = ({ show }: Props) => {
   const [name, setName] = useState("");
+  const [marked, setMarked] = useState(false);
 
   const user = useAuthStore((state) => state.user);
   const createItem = useShoppingStore((state) => state.createItem);
@@ -22,6 +29,10 @@ const FooterForm = ({ show }: Props) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
+  };
+
+  const handleMarkedToggle = () => {
+    setMarked((prev) => !prev);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -59,7 +70,7 @@ const FooterForm = ({ show }: Props) => {
         createItem({
           name: itemName,
           done: false,
-          marked: false,
+          marked,
           creator: user!.name,
           creatorId: user!.$id,
           order: totalCount + index + 1,
@@ -96,6 +107,7 @@ const FooterForm = ({ show }: Props) => {
         >
           <form onSubmit={handleSubmit} className="flex w-full gap-2">
             <Input
+              name="shopping-item"
               type="text"
               value={name}
               placeholder="Enter your text here..."
@@ -104,7 +116,25 @@ const FooterForm = ({ show }: Props) => {
               required
               onChange={handleChange}
             />
-            <Button type="submit" disabled={name.trim() === ""}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Toggle
+                  onClick={handleMarkedToggle}
+                  pressed={marked}
+                  variant={marked ? "outline" : "default"}
+                  type="button"
+                  aria-label="Toggle marked state"
+                >
+                  <StarIcon />
+                </Toggle>
+              </TooltipTrigger>
+              <TooltipContent>Toggle marked state</TooltipContent>
+            </Tooltip>
+            <Button
+              type="submit"
+              disabled={name.trim() === ""}
+              aria-label="Add new item to the shopping list"
+            >
               <PlusCircleIcon />
             </Button>
           </form>

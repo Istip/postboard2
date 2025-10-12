@@ -23,6 +23,7 @@ const convertToShopping = (row: AppwriteRow): Shopping => ({
   creator: row.creator as string,
   creatorId: row.creatorId as string,
   order: row.order as number,
+  description: row.description as string | undefined,
 });
 
 interface ShoppingState {

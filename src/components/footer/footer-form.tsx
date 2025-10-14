@@ -49,7 +49,6 @@ const FooterForm = ({ show }: Props) => {
       return;
     }
 
-    // Check for existing items
     const existingItems = itemNames.filter((itemName) =>
       items?.some((item) => item.name.toLowerCase() === itemName.toLowerCase())
     );
@@ -65,7 +64,6 @@ const FooterForm = ({ show }: Props) => {
     }
 
     try {
-      // Create each item individually
       const promises = itemNames.map((itemName, index) =>
         createItem({
           name: itemName,

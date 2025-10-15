@@ -32,7 +32,6 @@ const ShoppingCardDialog = ({ item }: Props) => {
   const handleSave = async () => {
     const trimmedDescription = description.trim();
 
-    // Use the same logic as isDescriptionModified
     if (!isDescriptionModified()) {
       setIsEditing(false);
       return;
@@ -64,15 +63,12 @@ const ShoppingCardDialog = ({ item }: Props) => {
 
   const isDescriptionModified = () => {
     const trimmedDescription = description.trim();
-    const originalDescription = item.description; // Don't fallback to empty string
+    const originalDescription = item.description; 
 
-    // If original was null/undefined and new is empty, no change
     if (!originalDescription && !trimmedDescription) {
       return false;
     }
 
-    // If original exists and new is different (including empty), it's a change
-    // If original doesn't exist and new has content, it's a change
     return trimmedDescription !== (originalDescription || "");
   };
 

@@ -114,6 +114,9 @@ const ShoppingCard = ({ item }: Props) => {
         inputRef.current &&
         !inputRef.current.contains(event.target as Node)
       ) {
+        event.preventDefault();
+        event.stopPropagation();
+
         if (value.trim() && value !== item.name) {
           updateItem(item.$id, { name: value.trim() });
         } else {
@@ -124,88 +127,97 @@ const ShoppingCard = ({ item }: Props) => {
     };
 
     if (edit) {
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside, true);
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside, true);
     };
   }, [edit, value, item.name, item.$id, updateItem]);
 
   return (
-    <motion.div
-      layoutId={`shopping-card-${item.$id}`}
-      className="h-full w-full"
-    >
-      <ShoppingCardWrapper
-        variant={variant}
-        className="flex flex-col justify-between h-full w-full"
+    <>
+      {edit && (
+        <div className="fixed inset-0 bg-background/20 backdrop-blur-[10px] z-40" />
+      )}
+
+      <motion.div
+        layoutId={`shopping-card-${item.$id}`}
+        className={`h-full w-full ${edit ? "relative z-50" : ""}`}
       >
-        <>
-          {edit ? (
-            <form onSubmit={handleUpdate} className="w-full gap-1 flex">
-              <Input
-                ref={inputRef}
-                value={value}
-                autoFocus
-                onChange={handleChange}
-                onKeyDown={handleKeyDown}
-              />
-              <Button size="sm" variant="ghost" type="submit">
-                <Edit />
-              </Button>
-            </form>
-          ) : (
-            <ShoppingCardTitle variant={variant} className="flex gap-1 w-full">
-              <div
-                className={`${
-                  isDefault ? "cursor-pointer" : ""
-                } w-full my-auto leading-5`}
-                onClick={handleToggleEdit}
+        <ShoppingCardWrapper
+          variant={variant}
+          className="flex flex-col justify-between h-full w-full"
+        >
+          <>
+            {edit ? (
+              <form onSubmit={handleUpdate} className="w-full gap-1 flex">
+                <Input
+                  ref={inputRef}
+                  value={value}
+                  autoFocus
+                  onChange={handleChange}
+                  onKeyDown={handleKeyDown}
+                />
+                <Button size="sm" variant="ghost" type="submit">
+                  <Edit />
+                </Button>
+              </form>
+            ) : (
+              <ShoppingCardTitle
+                variant={variant}
+                className="flex gap-1 w-full"
               >
-                {item.name}
-              </div>
+                <div
+                  className={`${
+                    isDefault ? "cursor-pointer" : ""
+                  } w-full my-auto leading-5`}
+                  onClick={handleToggleEdit}
+                >
+                  {item.name}
+                </div>
+                <Button
+                  className={`${
+                    item.marked ? "text-primary dark:text-background" : ""
+                  }`}
+                  variant={
+                    item.marked ? "outline" : item.done ? "ghost" : "outline"
+                  }
+                  size="sm"
+                  onClick={handleMarked}
+                >
+                  <StarIcon />
+                </Button>
+              </ShoppingCardTitle>
+            )}
+          </>
+          <div className="flex gap-2 w-full justify-between">
+            <Button size="sm" variant="destructive" onClick={handleRemove}>
+              <Trash />
+            </Button>
+            <ButtonGroup>
               <Button
-                className={`${
-                  item.marked ? "text-primary dark:text-background" : ""
-                }`}
+                size="sm"
+                className={item.marked ? "text-background" : ""}
+                variant="ghost"
+                onClick={handleInfoClick}
+              >
+                <InfoIcon />
+              </Button>
+              <Button
                 variant={
-                  item.marked ? "outline" : item.done ? "ghost" : "outline"
+                  item.done ? "ghost" : item.marked ? "default" : "secondary"
                 }
                 size="sm"
-                onClick={handleMarked}
+                onClick={handleDone}
               >
-                <StarIcon />
+                <CheckCircle />
               </Button>
-            </ShoppingCardTitle>
-          )}
-        </>
-        <div className="flex gap-2 w-full justify-between">
-          <Button size="sm" variant="destructive" onClick={handleRemove}>
-            <Trash />
-          </Button>
-          <ButtonGroup>
-            <Button
-              size="sm"
-              className={item.marked ? "text-background" : ""}
-              variant="ghost"
-              onClick={handleInfoClick}
-            >
-              <InfoIcon />
-            </Button>
-            <Button
-              variant={
-                item.done ? "ghost" : item.marked ? "default" : "secondary"
-              }
-              size="sm"
-              onClick={handleDone}
-            >
-              <CheckCircle />
-            </Button>
-          </ButtonGroup>
-        </div>
-      </ShoppingCardWrapper>
-    </motion.div>
+            </ButtonGroup>
+          </div>
+        </ShoppingCardWrapper>
+      </motion.div>
+    </>
   );
 };
 

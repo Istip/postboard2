@@ -89,7 +89,6 @@ const AnimatedDialogPortal = ({
           animate={{ opacity: 1 }}
           transition={{ duration: 0.2 }}
         >
-          {/* Backdrop */}
           <motion.div
             className="absolute inset-0 bg-background/80 backdrop-blur-sm"
             initial={{ opacity: 0 }}
@@ -97,7 +96,6 @@ const AnimatedDialogPortal = ({
             exit={{ opacity: 0 }}
             onClick={closeDialog}
           />
-          {/* Dialog Content */}
           <motion.div
             layoutId={layoutId}
             className={`relative w-full max-w-lg m-4 rounded-xl shadow-2xl p-4 ${className}`}

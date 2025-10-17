@@ -138,7 +138,7 @@ const ShoppingCard = ({ item }: Props) => {
   return (
     <>
       {edit && (
-        <div className="fixed inset-0 bg-background/20 backdrop-blur-[10px] z-40" />
+        <div className="fixed inset-0 bg-background/20 backdrop-blur-sm z-40" />
       )}
 
       <motion.div

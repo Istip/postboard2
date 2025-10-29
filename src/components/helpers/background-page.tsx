@@ -23,7 +23,7 @@ const BackgroundPage = ({ children, background }: BackgroundPageProps) => {
   return (
     <div style={styles}>
       <div className="relative z-10 min-h-full">
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-background/95 to-background/90" />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-background/80 via-background/90 via-50% to-background" />
         <div className="relative z-10 p-2">{children}</div>
       </div>
     </div>

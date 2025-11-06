@@ -4,6 +4,7 @@ import Login from "@/components/authentication/login";
 import Register from "@/components/authentication/register";
 import Redirection from "@/components/helpers/redirection";
 import { LogIn, UserPlus } from "lucide-react";
+import { motion } from "motion/react";
 
 const Authentication = () => {
   const user = useAuthStore((state) => state.user);
@@ -31,11 +32,23 @@ const Authentication = () => {
               <UserPlus className="mr-2" size={16} />I want to join
             </TabsTrigger>
           </TabsList>
-          <TabsContent value="login">
-            <Login />
+          <TabsContent value="login" className="min-h-[400px]">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Login />
+            </motion.div>
           </TabsContent>
-          <TabsContent value="register">
-            <Register />
+          <TabsContent value="register" className="min-h-[400px]">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Register />
+            </motion.div>
           </TabsContent>
         </Tabs>
       </div>

@@ -30,7 +30,7 @@ const Authentication = () => {
               <UserPlus className="mr-2" size={16} />I want to join
             </TabsTrigger>
           </TabsList>
-          <TabsContent value="login" className="min-h-[400px]">
+          <TabsContent value="login">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -39,7 +39,7 @@ const Authentication = () => {
               <Login />
             </motion.div>
           </TabsContent>
-          <TabsContent value="register" className="min-h-[400px]">
+          <TabsContent value="register">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

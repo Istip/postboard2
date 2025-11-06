@@ -28,7 +28,7 @@ const FooterIcons = () => {
   ];
 
   return (
-    <div className="flex items-center w-full space-x-1">
+    <div className="flex items-center w-full space-x-1 max-w-lg">
       {icons.map((item, index) => (
         <Button
           key={index}

@@ -122,12 +122,12 @@ const FooterForm = ({ show }: Props) => {
                   pressed={marked}
                   variant={marked ? "outline" : "default"}
                   type="button"
-                  aria-label="Toggle marked state"
+                  aria-label="Check to created marked items"
                 >
                   <StarIcon />
                 </Toggle>
               </TooltipTrigger>
-              <TooltipContent>Toggle marked state</TooltipContent>
+              <TooltipContent>Check to created marked items</TooltipContent>
             </Tooltip>
             <Button
               type="submit"

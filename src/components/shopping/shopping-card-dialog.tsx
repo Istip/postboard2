@@ -63,7 +63,7 @@ const ShoppingCardDialog = ({ item }: Props) => {
 
   const isDescriptionModified = () => {
     const trimmedDescription = description.trim();
-    const originalDescription = item.description; 
+    const originalDescription = item.description;
 
     if (!originalDescription && !trimmedDescription) {
       return false;
@@ -91,7 +91,7 @@ const ShoppingCardDialog = ({ item }: Props) => {
           <span className="text-right font-semibold text-sm">{data.label}</span>
         </div>
       ))}
-      <Divider>MORE</Divider>
+      <Divider variant={item.marked ? "primary" : "accent"}>MORE</Divider>
       <>
         <div className="flex items-center justify-between mb-2">
           <h4 className="text-sm font-medium">Description:</h4>

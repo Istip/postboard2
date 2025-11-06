@@ -12,6 +12,9 @@ import Private from "@/pages/private";
 
 // Layouts
 import DashboardLayout from "@/layouts/dashboard-layout";
+
+// Components
+import ProtectedRoute from "@/components/helpers/protected-route";
 import { Toaster } from "@/components/ui/sonner";
 import { AnimatedDialogProvider } from "@/components/ui/animated-dialog";
 
@@ -31,7 +34,13 @@ export default function App() {
         <Router>
           <Routes>
             <Route path="auth" element={<Authentication />} />
-            <Route element={<DashboardLayout />}>
+            <Route
+              element={
+                <ProtectedRoute>
+                  <DashboardLayout />
+                </ProtectedRoute>
+              }
+            >
               <Route index element={<ShoppingList />} />
               <Route path="tutorial" element={<Tutorial />} />
               <Route path="notes" element={<Notes />} />

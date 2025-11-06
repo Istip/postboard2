@@ -5,12 +5,12 @@ const ShoppingEmpty = () => {
   return (
     <div className="space-y-1 text-center">
       <Frown
-        className="mx-auto mb-4 p-4 rounded-xl bg-secondary text-foreground"
+        className="mx-auto mb-4 p-4 rounded-xl bg-primary text-muted animate-pulse"
         size={64}
       />
       <p className="my-2">Your shopping list is empty.</p>
       <p className="text-sm text-muted-foreground">
-        Please use the button from your footer to open the shopping item
+        Please use the toggler button from your footer to open the shopping item
         creation form.
       </p>
       <p className="my-2 text-sm">

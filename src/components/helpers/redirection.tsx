@@ -36,8 +36,7 @@ const Redirection = () => {
           size={64}
         />
         <p>
-          You are already logged in as{" "}
-          <b className="text-primary">{user!.name}</b>
+          Login was successful by <b className="text-primary">{user!.name}</b>
         </p>
         <p>
           Redirecting to the Dashboard in{" "}

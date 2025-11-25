@@ -104,7 +104,10 @@ const FooterForm = ({ show }: Props) => {
           exit={{ opacity: 0, height: 0, marginTop: 0 }}
           transition={{ duration: 0.2 }}
         >
-          <form onSubmit={handleSubmit} className="flex w-full gap-2">
+          <form
+            onSubmit={handleSubmit}
+            className="flex max-w-7xl mx-auto gap-2"
+          >
             <Input
               name="shopping-item"
               type="text"

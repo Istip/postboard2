@@ -30,42 +30,44 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className="fixed top-0 w-screen bg-secondary border-b border-foreground/20 p-4 flex items-center justify-between">
-      <Logo />
-      {user && (
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Avatar className="cursor-pointer">
-                  <AvatarImage src="" alt={user.name} />
-                  <AvatarFallback>{initials(user.name)}</AvatarFallback>
-                </Avatar>
-              </TooltipTrigger>
-              <TooltipContent>Click to open the Menu</TooltipContent>
-            </Tooltip>
-          </DropdownMenuTrigger>
+    <nav className="fixed top-0 w-screen bg-secondary border-b border-foreground/20 px-2 py-4 xl:px-0">
+      <div className="max-w-7xl flex items-center justify-between mx-auto">
+        <Logo />
+        {user && (
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Avatar className="cursor-pointer">
+                    <AvatarImage src="" alt={user.name} />
+                    <AvatarFallback>{initials(user.name)}</AvatarFallback>
+                  </Avatar>
+                </TooltipTrigger>
+                <TooltipContent>Click to open the Menu</TooltipContent>
+              </Tooltip>
+            </DropdownMenuTrigger>
 
-          <DropdownMenuContent className="p-2 mr-2 text-center">
-            <h2 className="text-xl heading text-muted-foreground">
-              Hello, <p className="heading text-primary">{user.name}</p>
-            </h2>
-            <Divider>PAGES</Divider>
-            {routes.map((route) => (
-              <DropdownMenuItem asChild key={route.name}>
-                <Link to={route.path}>{route.name}</Link>
+            <DropdownMenuContent className="p-2 mr-2 text-center">
+              <h2 className="text-xl heading text-muted-foreground">
+                Hello, <p className="heading text-primary">{user.name}</p>
+              </h2>
+              <Divider>PAGES</Divider>
+              {routes.map((route) => (
+                <DropdownMenuItem asChild key={route.name}>
+                  <Link to={route.path}>{route.name}</Link>
+                </DropdownMenuItem>
+              ))}
+              <Divider>SETTINGS</Divider>
+              <DropdownMenuItem>Profile</DropdownMenuItem>
+              <DropdownMenuItem>Settings</DropdownMenuItem>
+              <ThemeToggle />
+              <DropdownMenuItem variant="destructive" onClick={logout}>
+                Logout
               </DropdownMenuItem>
-            ))}
-            <Divider>SETTINGS</Divider>
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <ThemeToggle />
-            <DropdownMenuItem variant="destructive" onClick={logout}>
-              Logout
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
+      </div>
     </nav>
   );
 };

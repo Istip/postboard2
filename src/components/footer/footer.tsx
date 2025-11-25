@@ -31,9 +31,9 @@ const Footer = () => {
   return (
     <footer
       ref={footerRef}
-      className="fixed bottom-0 center w-full p-4 bg-secondary flex justify-between flex-col border-t border-foreground/20"
+      className="fixed bottom-0 center w-full px-2 py-4 xl:px-0 bg-secondary flex justify-between flex-col border-t border-foreground/20"
     >
-      <div className="w-full flex justify-between items-center">
+      <div className="w-full max-w-7xl mx-auto flex justify-between items-center">
         <FooterIcons />
         <Button
           variant={show ? "ghost" : "default"}

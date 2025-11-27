@@ -112,7 +112,7 @@ const FooterForm = ({ show }: Props) => {
               name="shopping-item"
               type="text"
               value={name}
-              placeholder="Enter your text here..."
+              placeholder="Add items to your shopping list"
               className="w-full"
               autoFocus
               required

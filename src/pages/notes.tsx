@@ -3,7 +3,14 @@ import Title from "@/components/ui/title";
 import { backgrounds } from "@/lib/backgrounds";
 import { useState } from "react";
 import { Reorder, useDragControls } from "motion/react";
-import { Clock, GripVertical, SendHorizonal, Star, Trash } from "lucide-react";
+import {
+  Clock,
+  Eye,
+  GripVertical,
+  SendHorizonal,
+  Star,
+  Trash,
+} from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { mockNotes } from "@/lib/mock";
@@ -24,8 +31,8 @@ const NoteItem = ({ note }: { note: Note }) => {
     <Reorder.Item
       key={note.id}
       value={note}
-      className={` pr-2 py-2 backdrop-blur-md rounded-lg select-none touch-manipulation ${
-        note.marked ? "bg-primary" : "bg-background/20"
+      className={` pr-2 py-2 rounded-lg select-none touch-manipulation ${
+        note.marked ? "bg-primary" : "bg-background"
       }`}
       dragListener={false}
       dragControls={controls}
@@ -137,9 +144,16 @@ const Notes = () => {
         {noteGroups.map(({ category, items }) => (
           <div
             key={category}
-            className="space-y-2 bg-secondary p-2 rounded-lg border border-background"
+            className="space-y-2 bg-background/20 backdrop-blur-sm p-2 rounded-lg border border-background"
           >
-            <h3 className="text-center font-semibold mb-2">{category}</h3>
+            <div className="flex items-center justify-between relative">
+              <h3 className="text-center font-semibold text-lg flex-1 ml-[38.86px]">
+                {category}
+              </h3>
+              <Button variant="link" size="sm">
+                <Eye />
+              </Button>
+            </div>
             <Reorder.Group
               axis="y"
               values={items}

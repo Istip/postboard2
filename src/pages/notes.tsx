@@ -3,13 +3,18 @@ import Title from "@/components/ui/title";
 import { backgrounds } from "@/lib/backgrounds";
 import { useState } from "react";
 import { Reorder, useDragControls } from "motion/react";
-import { GripVertical } from "lucide-react";
+import { Clock, GripVertical, SendHorizonal, Star, Trash } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { mockNotes } from "@/lib/mock";
+import { ButtonGroup } from "@/components/ui/button-group";
 
 type Note = {
   id: string;
   content: string;
   category: string;
   order: number;
+  marked: boolean;
 };
 
 const NoteItem = ({ note }: { note: Note }) => {
@@ -19,7 +24,9 @@ const NoteItem = ({ note }: { note: Note }) => {
     <Reorder.Item
       key={note.id}
       value={note}
-      className="p-2 bg-background/20 backdrop-blur-md rounded-lg select-none touch-manipulation"
+      className={`pl-4 pr-2 py-2 backdrop-blur-md rounded-lg select-none touch-manipulation ${
+        note.marked ? "bg-primary" : "bg-background/20"
+      }`}
       dragListener={false}
       dragControls={controls}
       initial={{ rotate: 0 }}
@@ -28,48 +35,52 @@ const NoteItem = ({ note }: { note: Note }) => {
       dragElastic={0.1}
     >
       <div className="flex items-center justify-between space-x-2">
-        <div>
-          <span className="flex-1">{note.content}</span>{" "}
-          <span>{note.order}</span>
+        <div className="space-y-1">
+          <div
+            className={`flex-1 text-sm ${
+              note.marked ? "text-muted" : "text-foreground"
+            }`}
+          >
+            {note.content}
+          </div>
+          <div
+            className={`flex items-center gap-1 ${
+              note.marked ? "text-muted/50" : "text-muted-foreground/50"
+            }`}
+          >
+            <Clock className="h-4 w-4" />
+            <div className="text-xs">2025.01.15</div>
+          </div>
         </div>
-        <div
-          className="cursor-grab active:cursor-grabbing p-2 hover:bg-background/50 backdrop-blur-2xl rounded touch-manipulation"
-          onPointerDown={(e) => {
-            e.preventDefault();
-            controls.start(e);
-          }}
-          style={{ touchAction: "none" }}
-        >
-          <GripVertical className="w-5 h-5 text-gray-400" />
+
+        <div className="flex items-center justify-center gap-2">
+          <ButtonGroup>
+            <Button size="sm" variant="destructive">
+              <Trash />
+            </Button>
+            <Button size="sm" variant="secondary">
+              <Star />
+            </Button>
+          </ButtonGroup>
+          <div
+            className="cursor-grab active:cursor-grabbing p-2 rounded touch-manipulation"
+            onPointerDown={(e) => {
+              e.preventDefault();
+              controls.start(e);
+            }}
+            style={{ touchAction: "none" }}
+          >
+            <GripVertical
+              className={`w-4 h-4 ${
+                note.marked ? "text-muted/50" : "text-muted-foreground/50"
+              }`}
+            />
+          </div>
         </div>
       </div>
     </Reorder.Item>
   );
 };
-
-const mockNotes = [
-  { id: "work-1", content: "First Note", category: "Work", order: 1 },
-  { id: "work-2", content: "Two Three", category: "Work", order: 2 },
-  { id: "work-3", content: "Test stuff", category: "Work", order: 3 },
-  {
-    id: "personal-1",
-    content: "Personal Jesus",
-    category: "Personal",
-    order: 1,
-  },
-  { id: "personal-2", content: "Yolo", category: "Personal", order: 2 },
-  {
-    id: "personal-3",
-    content: "Dunno what to say",
-    category: "Personal",
-    order: 3,
-  },
-  { id: "ideas-1", content: "First Note", category: "Ideas", order: 1 },
-  { id: "ideas-2", content: "Second Note", category: "Ideas", order: 2 },
-  { id: "ideas-3", content: "Third Note", category: "Ideas", order: 3 },
-  { id: "ideas-4", content: "Fourth Note", category: "Ideas", order: 4 },
-  { id: "ideas-5", content: "Fifth Note", category: "Ideas", order: 5 },
-];
 
 const Notes = () => {
   // Create grouped notes state
@@ -120,20 +131,29 @@ const Notes = () => {
   return (
     <BackgroundPage background={backgrounds.notes}>
       <Title>Notes</Title>
-      <div className="space-y-6">
+      <div className="space-y-4">
         {noteGroups.map(({ category, items }) => (
-          <div key={category} className="space-y-2 mx-2">
-            <h3 className="text-lg font-semibold">{category}</h3>
+          <div
+            key={category}
+            className="space-y-2 bg-secondary p-2 rounded-lg border border-background"
+          >
+            <h3 className="text-center font-semibold mb-2">{category}</h3>
             <Reorder.Group
               axis="y"
               values={items}
               onReorder={(newOrder) => handleReorder(category, newOrder)}
-              className="space-y-2"
+              className="space-y-1"
               layoutScroll={false}
             >
               {items.map((note) => (
                 <NoteItem key={note.id} note={note} />
               ))}
+              <div className="flex gap-2 w-full mt-2">
+                <Input placeholder={`Add a new note to ${category}`} />
+                <Button type="submit">
+                  <SendHorizonal />
+                </Button>
+              </div>
             </Reorder.Group>
           </div>
         ))}

@@ -24,7 +24,7 @@ const NoteItem = ({ note }: { note: Note }) => {
     <Reorder.Item
       key={note.id}
       value={note}
-      className={`pl-4 pr-2 py-2 backdrop-blur-md rounded-lg select-none touch-manipulation ${
+      className={` pr-2 py-2 backdrop-blur-md rounded-lg select-none touch-manipulation ${
         note.marked ? "bg-primary" : "bg-background/20"
       }`}
       dragListener={false}
@@ -35,33 +35,7 @@ const NoteItem = ({ note }: { note: Note }) => {
       dragElastic={0.1}
     >
       <div className="flex items-center justify-between space-x-2">
-        <div className="space-y-1">
-          <div
-            className={`flex-1 text-sm ${
-              note.marked ? "text-muted" : "text-foreground"
-            }`}
-          >
-            {note.content}
-          </div>
-          <div
-            className={`flex items-center gap-1 ${
-              note.marked ? "text-muted/50" : "text-muted-foreground/50"
-            }`}
-          >
-            <Clock className="h-4 w-4" />
-            <div className="text-xs">2025.01.15</div>
-          </div>
-        </div>
-
-        <div className="flex items-center justify-center gap-2">
-          <ButtonGroup>
-            <Button size="sm" variant="destructive">
-              <Trash />
-            </Button>
-            <Button size="sm" variant="secondary">
-              <Star />
-            </Button>
-          </ButtonGroup>
+        <div className="center gap-0">
           <div
             className="cursor-grab active:cursor-grabbing p-2 rounded touch-manipulation"
             onPointerDown={(e) => {
@@ -76,6 +50,34 @@ const NoteItem = ({ note }: { note: Note }) => {
               }`}
             />
           </div>
+          <div className="space-y-1">
+            <div
+              className={`flex-1 text-sm ${
+                note.marked ? "text-muted" : "text-foreground"
+              }`}
+            >
+              {note.content}
+            </div>
+            <div
+              className={`flex items-center gap-1 ${
+                note.marked ? "text-muted/50" : "text-muted-foreground/50"
+              }`}
+            >
+              <Clock className="h-4 w-4" />
+              <div className="text-xs">2025.01.15</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-center gap-2">
+          <ButtonGroup>
+            <Button size="sm" variant="destructive">
+              <Trash />
+            </Button>
+            <Button size="sm" variant="secondary">
+              <Star />
+            </Button>
+          </ButtonGroup>
         </div>
       </div>
     </Reorder.Item>

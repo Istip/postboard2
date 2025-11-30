@@ -24,14 +24,31 @@ type Note = {
   marked: boolean;
 };
 
-const NoteItem = ({ note }: { note: Note }) => {
+const NoteItem = ({
+  note,
+  isFirst,
+  isLast,
+  isSingle,
+}: {
+  note: Note;
+  isFirst?: boolean;
+  isLast?: boolean;
+  isSingle?: boolean;
+}) => {
   const controls = useDragControls();
+
+  const getBorderRadius = () => {
+    if (isSingle) return "rounded-lg";
+    if (isFirst) return "rounded-t-lg";
+    if (isLast) return "rounded-b-lg";
+    return "";
+  };
 
   return (
     <Reorder.Item
       key={note.id}
       value={note}
-      className={` pr-2 py-2 rounded-lg select-none touch-manipulation ${
+      className={` pr-2 py-2 ${getBorderRadius()} select-none touch-manipulation ${
         note.marked ? "bg-primary" : "bg-background"
       }`}
       dragListener={false}
@@ -158,11 +175,17 @@ const Notes = () => {
               axis="y"
               values={items}
               onReorder={(newOrder) => handleReorder(category, newOrder)}
-              className="space-y-1"
+              className="space-y-0"
               layoutScroll={false}
             >
-              {items.map((note) => (
-                <NoteItem key={note.id} note={note} />
+              {items.map((note, index) => (
+                <NoteItem
+                  key={note.id}
+                  note={note}
+                  isFirst={index === 0}
+                  isLast={index === items.length - 1}
+                  isSingle={items.length === 1}
+                />
               ))}
               <div className="flex gap-2 w-full mt-2">
                 <Input placeholder={`Add a new note to ${category}`} />

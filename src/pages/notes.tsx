@@ -44,7 +44,7 @@ const NoteItem = ({ note }: { note: Note }) => {
       <div className="flex items-center justify-between space-x-2">
         <div className="center gap-0">
           <div
-            className="cursor-grab active:cursor-grabbing p-2 rounded touch-manipulation"
+            className="cursor-grab active:cursor-grabbing p-2 touch-manipulation"
             onPointerDown={(e) => {
               e.preventDefault();
               controls.start(e);

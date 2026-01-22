@@ -17,6 +17,8 @@ import DashboardLayout from "@/layouts/dashboard-layout";
 import ProtectedRoute from "@/components/helpers/protected-route";
 import { Toaster } from "@/components/ui/sonner";
 import { AnimatedDialogProvider } from "@/components/ui/animated-dialog";
+import Settings from "@/pages/settings";
+import SettingsLayout from "@/layouts/settings-layout";
 
 export default function App() {
   const fetchUser = useAuthStore((state) => state.fetchUser);
@@ -45,6 +47,15 @@ export default function App() {
               <Route path="tutorial" element={<Tutorial />} />
               <Route path="notes" element={<Notes />} />
               <Route path="private" element={<Private />} />
+            </Route>
+            <Route
+              element={
+                <ProtectedRoute>
+                  <SettingsLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route path="settings" element={<Settings />} />
             </Route>
           </Routes>
         </Router>

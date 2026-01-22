@@ -11,7 +11,7 @@ const SettingsLayout = () => {
         marginTop: `${height}px`,
       }}
     >
-      <Navigation />
+      <Navigation showBackButton={true} />
       <Outlet />
     </div>
   );

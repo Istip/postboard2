@@ -27,6 +27,10 @@ const Navigation = () => {
       name: "Tutorial",
       path: "/tutorial",
     },
+    {
+      name: "Settings",
+      path: "/settings",
+    },
   ];
 
   return (
@@ -51,15 +55,13 @@ const Navigation = () => {
               <h2 className="text-xl heading text-muted-foreground">
                 Hello, <p className="heading text-primary">{user.name}</p>
               </h2>
-              <Divider>PAGES</Divider>
+              <Divider>NAVIGATION</Divider>
               {routes.map((route) => (
                 <DropdownMenuItem asChild key={route.name}>
                   <Link to={route.path}>{route.name}</Link>
                 </DropdownMenuItem>
               ))}
-              <Divider>SETTINGS</Divider>
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Settings</DropdownMenuItem>
+              <Divider>ADMINISTRATION</Divider>
               <ThemeToggle />
               <DropdownMenuItem variant="destructive" onClick={logout}>
                 Logout

@@ -18,7 +18,6 @@ This is a React-based postboard application with authentication, theming, and da
 - **Styling**: TailwindCSS with Shadcn UI components as the primary design system
 - **State Management**: Zustand for global state
 - **Backend**: Appwrite for authentication and data services
-- **Routing**: [You might want to specify if using React Router]
 
 ## Architecture Patterns
 

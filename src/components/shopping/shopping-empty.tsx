@@ -4,10 +4,9 @@ import { Link } from "react-router";
 const ShoppingEmpty = () => {
   return (
     <div className="space-y-1 text-center">
-      <Frown
-        className="mx-auto mb-4 p-4 rounded-xl bg-primary text-muted animate-pulse"
-        size={64}
-      />
+      <div className="w-fit h-fit mb-4 rounded-xl mx-auto border border-primary overflow-hidden">
+        <Frown className="p-4 bg-primary text-muted animate-pulse" size={64} />
+      </div>
       <p className="my-2">Your shopping list is empty.</p>
       <p className="text-sm text-muted-foreground">
         Please use the toggler button from your footer to open the shopping item

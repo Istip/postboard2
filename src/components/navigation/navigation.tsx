@@ -16,6 +16,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Settings } from "lucide-react";
 
 interface Props {
   showBackButton?: boolean;
@@ -26,14 +27,13 @@ const Navigation = ({ showBackButton = false }: Props) => {
   const logout = useAuthStore((state) => state.logout);
 
   const routes = [
-    { name: "Home", path: "/" },
+    {
+      name: "Home",
+      path: "/",
+    },
     {
       name: "Tutorial",
       path: "/tutorial",
-    },
-    {
-      name: "Settings",
-      path: "/settings",
     },
   ];
 
@@ -42,36 +42,46 @@ const Navigation = ({ showBackButton = false }: Props) => {
       <div className="max-w-7xl flex items-center justify-between mx-auto">
         <Logo showBackButton={showBackButton} />
         {user && (
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Avatar className="cursor-pointer">
-                    <AvatarImage src="" alt={user.name} />
-                    <AvatarFallback>{initials(user.name)}</AvatarFallback>
-                  </Avatar>
-                </TooltipTrigger>
-                <TooltipContent>Click to open the Menu</TooltipContent>
-              </Tooltip>
-            </DropdownMenuTrigger>
+          <div className="center">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link to="/settings" className="mr-4 py-1">
+                  <Settings className="text-muted-foreground" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>Go to Settings page</TooltipContent>
+            </Tooltip>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Avatar className="cursor-pointer">
+                      <AvatarImage src="" alt={user.name} />
+                      <AvatarFallback>{initials(user.name)}</AvatarFallback>
+                    </Avatar>
+                  </TooltipTrigger>
+                  <TooltipContent>Open the Menu</TooltipContent>
+                </Tooltip>
+              </DropdownMenuTrigger>
 
-            <DropdownMenuContent className="p-2 mr-2 text-center">
-              <h2 className="text-xl heading text-muted-foreground">
-                Hello, <p className="heading text-primary">{user.name}</p>
-              </h2>
-              <Divider>NAVIGATION</Divider>
-              {routes.map((route) => (
-                <DropdownMenuItem asChild key={route.name}>
-                  <Link to={route.path}>{route.name}</Link>
+              <DropdownMenuContent className="p-2 mr-2 text-center">
+                <h2 className="text-xl heading text-muted-foreground">
+                  Hello, <p className="heading text-primary">{user.name}</p>
+                </h2>
+                <Divider>NAVIGATION</Divider>
+                {routes.map((route) => (
+                  <DropdownMenuItem asChild key={route.name}>
+                    <Link to={route.path}>{route.name}</Link>
+                  </DropdownMenuItem>
+                ))}
+                <Divider>ADMINISTRATION</Divider>
+                <ThemeToggle />
+                <DropdownMenuItem variant="destructive" onClick={logout}>
+                  Logout
                 </DropdownMenuItem>
-              ))}
-              <Divider>ADMINISTRATION</Divider>
-              <ThemeToggle />
-              <DropdownMenuItem variant="destructive" onClick={logout}>
-                Logout
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         )}
       </div>
     </nav>

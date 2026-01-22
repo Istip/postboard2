@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { motion } from "motion/react";
+import { ChevronLeft } from "lucide-react";
 
-const Logo = () => {
+interface Props {
+  showBackButton?: boolean;
+}
+
+const Logo = ({ showBackButton = false }: Props) => {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -35,15 +40,18 @@ const Logo = () => {
             </motion.span>
           )}
           {hovered && (
-            <motion.span
-              className="text-base heading text-background"
+            <motion.div
+              className="center"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ delay: 0.15, duration: 0.2 }}
             >
-              Postboard
-            </motion.span>
+              {showBackButton && (
+                <ChevronLeft size={16} className="text-base text-background" />
+              )}
+              <div className="text-base heading text-background">Postboard</div>
+            </motion.div>
           )}
         </motion.div>
       </Link>

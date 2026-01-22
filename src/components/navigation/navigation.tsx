@@ -17,7 +17,11 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-const Navigation = () => {
+interface Props {
+  showBackButton?: boolean;
+}
+
+const Navigation = ({ showBackButton = false }: Props) => {
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
 
@@ -36,7 +40,7 @@ const Navigation = () => {
   return (
     <nav className="fixed top-0 w-screen bg-secondary border-b border-foreground/20 px-2 py-4 xl:px-0">
       <div className="max-w-7xl flex items-center justify-between mx-auto">
-        <Logo />
+        <Logo showBackButton={showBackButton} />
         {user && (
           <DropdownMenu>
             <DropdownMenuTrigger>

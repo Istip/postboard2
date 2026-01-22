@@ -50,7 +50,7 @@ const FooterForm = ({ show }: Props) => {
     }
 
     const existingItems = itemNames.filter((itemName) =>
-      items?.some((item) => item.name.toLowerCase() === itemName.toLowerCase())
+      items?.some((item) => item.name.toLowerCase() === itemName.toLowerCase()),
     );
 
     if (existingItems.length > 0) {
@@ -58,7 +58,7 @@ const FooterForm = ({ show }: Props) => {
         <>
           {existingItems.length === 1 ? "Item" : "Items"} already exist:{" "}
           <strong className="font-black">{existingItems.join(", ")}</strong>
-        </>
+        </>,
       );
       return;
     }
@@ -73,7 +73,7 @@ const FooterForm = ({ show }: Props) => {
           creatorId: user!.$id,
           order: totalCount + index + 1,
           description: "",
-        })
+        }),
       );
 
       await Promise.all(promises);
@@ -83,7 +83,7 @@ const FooterForm = ({ show }: Props) => {
         toast.success(`Item created: ${itemNames[0]}`);
       } else {
         toast.success(
-          `${itemNames.length} items created: ${itemNames.join(", ")}`
+          `${itemNames.length} items created: ${itemNames.join(", ")}`,
         );
       }
     } catch (error) {
@@ -125,12 +125,12 @@ const FooterForm = ({ show }: Props) => {
                   pressed={marked}
                   variant={marked ? "outline" : "default"}
                   type="button"
-                  aria-label="Check for create marked items"
+                  aria-label="Create marked items"
                 >
                   <StarIcon />
                 </Toggle>
               </TooltipTrigger>
-              <TooltipContent>Check for create marked items</TooltipContent>
+              <TooltipContent>Create marked items</TooltipContent>
             </Tooltip>
             <Button
               type="submit"

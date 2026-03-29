@@ -46,7 +46,7 @@ const Navigation = ({ showBackButton = false }: Props) => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link to="/settings" className="mr-4 py-1">
-                  <Settings className="text-muted-foreground" />
+                  <Settings className="text-muted-foreground hover:animate-spin" />
                 </Link>
               </TooltipTrigger>
               <TooltipContent>Go to Settings page</TooltipContent>

@@ -26,7 +26,6 @@
     "noUncheckedSideEffectImports": true,
 
     /* Import shortcuts */
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }

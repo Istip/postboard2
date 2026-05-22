@@ -134,7 +134,11 @@ const Register = () => {
           </Button>
         </form>
       </Form>
-      {error && <Error>{error}</Error>}
+      {error && (
+        <div className="pt-4">
+          <Error>{error}</Error>
+        </div>
+      )}
     </>
   );
 };

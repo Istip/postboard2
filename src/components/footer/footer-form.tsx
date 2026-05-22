@@ -12,6 +12,8 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useLocation } from "react-router";
+import { generateFooterFormPlaceholder } from "@/lib/labelGenerator";
 
 interface Props {
   show: boolean;
@@ -20,6 +22,8 @@ interface Props {
 const FooterForm = ({ show }: Props) => {
   const [name, setName] = useState("");
   const [marked, setMarked] = useState(false);
+
+  const { pathname } = useLocation();
 
   const user = useAuthStore((state) => state.user);
   const createItem = useShoppingStore((state) => state.createItem);
@@ -112,7 +116,7 @@ const FooterForm = ({ show }: Props) => {
               name="shopping-item"
               type="text"
               value={name}
-              placeholder="Add items to your shopping list"
+              placeholder={generateFooterFormPlaceholder(pathname)}
               className="w-full"
               autoFocus
               required

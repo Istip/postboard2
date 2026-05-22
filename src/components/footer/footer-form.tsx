@@ -122,20 +122,22 @@ const FooterForm = ({ show }: Props) => {
               required
               onChange={handleChange}
             />
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Toggle
-                  onClick={handleMarkedToggle}
-                  pressed={marked}
-                  variant={marked ? "outline" : "default"}
-                  type="button"
-                  aria-label="Create marked items"
-                >
-                  <StarIcon />
-                </Toggle>
-              </TooltipTrigger>
-              <TooltipContent>Create marked items</TooltipContent>
-            </Tooltip>
+            {pathname === "/" && (
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Toggle
+                    onClick={handleMarkedToggle}
+                    pressed={marked}
+                    variant={marked ? "outline" : "default"}
+                    type="button"
+                    aria-label="Create marked items"
+                  >
+                    <StarIcon />
+                  </Toggle>
+                </TooltipTrigger>
+                <TooltipContent>Create marked items</TooltipContent>
+              </Tooltip>
+            )}
             <Button
               type="submit"
               disabled={name.trim() === ""}

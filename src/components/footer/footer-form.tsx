@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { PlusCircleIcon, StarIcon } from "lucide-react";
+import { Plus, StarIcon } from "lucide-react";
 import { useShoppingStore } from "@/stores/shopping.store";
 import { useAuthStore } from "@/stores/auth.store";
 import { toast } from "sonner";
@@ -137,7 +137,7 @@ const FooterForm = ({ show }: Props) => {
               disabled={name.trim() === ""}
               aria-label="Add new item to the shopping list"
             >
-              <PlusCircleIcon />
+              <Plus />
             </Button>
           </form>
         </motion.div>

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronUpCircle, X } from "lucide-react";
+import { ChevronUp, X } from "lucide-react";
 import FooterIcons from "@/components/footer/footer-icons";
 import FooterForm from "@/components/footer/footer-form";
 
@@ -39,7 +39,7 @@ const Footer = () => {
           variant={show ? "ghost" : "default"}
           onClick={show ? handleClose : handleOpen}
         >
-          {show ? <X /> : <ChevronUpCircle />}
+          {show ? <X /> : <ChevronUp />}
         </Button>
       </div>
       <FooterForm show={show} />

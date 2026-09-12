@@ -72,7 +72,8 @@ This is a React-based postboard application with authentication, theming, and da
 - Prefer quick, focused validation over full build/lint cycles during active UI development.
 - When the user is testing with live reload, do not run full build commands unless they explicitly ask for verification or the task requires a production check.
 - Do not run linting, type-checking, or other automated checks during routine UI iteration when the user is actively testing in the browser.
-- Skip the step `pnpm exec tsc --noEmit` during normal UI work unless the user explicitly asks for a compile verification or the task requires it.
+- Explicitly do not run `pnpm exec tsc --noEmit` as a casual or default check during normal frontend work.
+- Only run TypeScript checking when the user explicitly asks for compile verification, when the fix is specifically about a TypeScript issue, or when a code change is known to require type validation.
 - The user is validating their own code visually and will call out issues; do not perform extra verification steps unless they specifically request them.
 - Default to direct code edits and browser/live-preview validation instead of running `npm run build`, `npm run lint`, or similar heavy commands for routine frontend tweaks.
 - If validation is necessary, keep it to the smallest relevant command and explain why it is needed.

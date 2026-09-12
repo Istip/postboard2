@@ -29,14 +29,14 @@ const Redirection = () => {
   }, [user, counter, navigate]);
 
   return (
-    <div className="flex flex-col justify-center items-center gap-4 w-screen h-[100dvh] text-center bg-background">
+    <div className="flex flex-col justify-center items-center gap-4 w-screen h-dvh text-center bg-background">
       <div className="text-foreground">
         <MessageCircleWarning
           className="mx-auto mb-4 p-4 rounded-xl bg-primary text-muted animate-pulse"
           size={64}
         />
         <p>
-          Login was successful by <b className="text-primary">{user!.name}</b>
+          Login was successful for <b className="text-primary">{user!.name}</b>
         </p>
         <p>
           Redirecting to the Dashboard in{" "}

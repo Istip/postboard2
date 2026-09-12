@@ -26,6 +26,9 @@ const convertToShopping = (row: AppwriteRow): Shopping => ({
   description: row.description as string | undefined,
 });
 
+const sortShoppingItems = (items: Shopping[]) =>
+  [...items].sort((a, b) => (b.order ?? 0) - (a.order ?? 0));
+
 interface ShoppingState {
   items: Shopping[];
   loading: boolean;
@@ -34,7 +37,7 @@ interface ShoppingState {
   fetchItems: () => Promise<void>;
   fetchCount: () => Promise<void>;
   createItem: (
-    data: Omit<Shopping, "$id" | "$createdAt" | "$updatedAt">
+    data: Omit<Shopping, "$id" | "$createdAt" | "$updatedAt">,
   ) => Promise<void>;
   updateItem: (id: string, data: Partial<Shopping>) => Promise<void>;
   deleteItem: (id: string) => Promise<void>;
@@ -59,9 +62,8 @@ export const useShoppingStore = create<ShoppingState>((set, get) => ({
         databaseId,
         tableId,
       })) as AppwriteResponse<AppwriteRow>;
-      // Convert AppwriteRow[] to Shopping[] safely using our helper
       set({
-        items: response.rows.map(convertToShopping),
+        items: sortShoppingItems(response.rows.map(convertToShopping)),
         loading: false,
       });
     } catch (error) {
@@ -102,13 +104,12 @@ export const useShoppingStore = create<ShoppingState>((set, get) => ({
         data: newItem,
       });
 
-      // Convert Appwrite response to Shopping safely using our helper
       const item = convertToShopping(res as AppwriteRow);
-      set({
-        items: [item, ...get().items],
-        totalCount: get().totalCount + 1,
+      set((state) => ({
+        items: sortShoppingItems([item, ...state.items]),
+        totalCount: state.totalCount + 1,
         loading: false,
-      });
+      }));
     } catch (error) {
       set({ error: (error as Error).message, loading: false });
     }
@@ -124,10 +125,12 @@ export const useShoppingStore = create<ShoppingState>((set, get) => ({
         data: { ...data, $updatedAt: new Date().toISOString() },
       });
       set({
-        items: get().items.map((item) =>
-          item.$id === id
-            ? { ...item, ...data, $updatedAt: new Date().toISOString() }
-            : item
+        items: sortShoppingItems(
+          get().items.map((item) =>
+            item.$id === id
+              ? { ...item, ...data, $updatedAt: new Date().toISOString() }
+              : item,
+          ),
         ),
         loading: false,
       });

@@ -48,15 +48,21 @@ const NoteItem = ({
     <Reorder.Item
       key={note.id}
       value={note}
-      className={` pr-2 py-2 ${getBorderRadius()} select-none touch-manipulation ${
+      className={`relative pr-2 py-2 ${getBorderRadius()} select-none touch-manipulation ${
         note.marked ? "bg-primary" : "bg-background"
       }`}
       dragListener={false}
       dragControls={controls}
       initial={{ rotate: 0 }}
       animate={{ rotate: 0 }}
+      whileDrag={{
+        scale: 1.01,
+        zIndex: 30,
+        boxShadow: "0 10px 24px rgba(15, 23, 42, 0.18)",
+      }}
       dragConstraints={{ left: 0, right: 0 }}
       dragElastic={0.1}
+      style={{ zIndex: 1 }}
     >
       <div className="flex items-center justify-between space-x-2">
         <div className="center gap-0">
@@ -113,14 +119,17 @@ const Notes = () => {
   const [notes, setNotes] = useState(mockNotes);
 
   // Group notes by category
-  const groupedNotes = notes.reduce((groups, note) => {
-    const category = note.category;
-    if (!groups[category]) {
-      groups[category] = [];
-    }
-    groups[category].push(note);
-    return groups;
-  }, {} as Record<string, typeof notes>);
+  const groupedNotes = notes.reduce(
+    (groups, note) => {
+      const category = note.category;
+      if (!groups[category]) {
+        groups[category] = [];
+      }
+      groups[category].push(note);
+      return groups;
+    },
+    {} as Record<string, typeof notes>,
+  );
 
   // Convert object to array for mapping
   const noteGroups = Object.entries(groupedNotes).map(([category, items]) => ({
@@ -139,12 +148,12 @@ const Notes = () => {
 
       // Find the original position of the first item in this category
       const firstCategoryIndex = prevNotes.findIndex(
-        (note) => note.category === category
+        (note) => note.category === category,
       );
 
       // Remove all items from this category
       const withoutCategory = prevNotes.filter(
-        (note) => note.category !== category
+        (note) => note.category !== category,
       );
 
       // Insert the reordered items back at the original category position

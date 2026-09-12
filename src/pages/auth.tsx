@@ -15,11 +15,11 @@ const Authentication = () => {
 
   return (
     <div className="grid md:grid-cols-2 gap-4 min-h-screen bg-background">
-      <div className="center text-muted bg-primary h-[33vh] md:h-auto p-4 text-center">
+      <div className="center text-muted bg-primary h-[33vh] w-full fixed left-0 top-0 z-10 p-4 text-center md:static md:h-auto md:w-auto md:z-auto">
         <h1 className="text-4xl font-extralight">Welcome to Postboard</h1>
       </div>
 
-      <div className="mx-auto md:my-auto w-full max-w-md p-4 mt-0">
+      <div className="mx-auto mt-[33vh] w-full max-w-md p-4 md:mt-0 md:my-auto">
         <Tabs defaultValue="login">
           <TabsList className="w-full mb-6">
             <TabsTrigger className="cursor-pointer" value="login">

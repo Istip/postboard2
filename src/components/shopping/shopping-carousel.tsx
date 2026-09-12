@@ -12,15 +12,18 @@ interface Props {
 
 const ShoppingCarousel = ({ items }: Props) => {
   return (
-    <Carousel opts={{ align: "start", loop: true }} className="w-full">
-      <CarouselContent className="mx-0">
+    <Carousel
+      opts={{ align: "start", loop: true }}
+      className="relative z-0 w-full"
+    >
+      <CarouselContent className="mx-0 overflow-visible">
         {items?.map((item) => (
           <CarouselItem
             key={item.$id}
             className="hover:cursor-grab basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 flex w-full text-background pl-2"
           >
             <motion.div
-              className="w-full h-full flex"
+              className="relative z-10 w-full h-full flex"
               whileTap={{ cursor: "grabbing", scale: 0.95 }}
             >
               <ShoppingCard item={item} />

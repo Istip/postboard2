@@ -40,7 +40,7 @@ const ShoppingCard = ({ item }: Props) => {
     openDialog(
       `shopping-card-${item.$id}`,
       <ShoppingCardDialog item={item} />,
-      style()
+      style(),
     );
   };
 
@@ -64,7 +64,7 @@ const ShoppingCard = ({ item }: Props) => {
     toast.error(
       <>
         Item removed: <strong className="font-black">{item.name}</strong>
-      </>
+      </>,
     );
     deleteItem(item.$id);
   };
@@ -143,11 +143,11 @@ const ShoppingCard = ({ item }: Props) => {
 
       <motion.div
         layoutId={`shopping-card-${item.$id}`}
-        className={`h-full w-full ${edit ? "relative z-50" : ""}`}
+        className={`relative z-10 h-full w-full ${edit ? "z-50" : ""}`}
       >
         <ShoppingCardWrapper
           variant={variant}
-          className="flex flex-col justify-between h-full w-full"
+          className="relative z-10 flex flex-col justify-between h-full w-full"
         >
           <>
             {edit ? (

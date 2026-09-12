@@ -29,11 +29,15 @@ const NoteItem = ({
   isFirst,
   isLast,
   isSingle,
+  onDragStart,
+  onDragEnd,
 }: {
   note: Note;
   isFirst?: boolean;
   isLast?: boolean;
   isSingle?: boolean;
+  onDragStart?: (noteId: string) => void;
+  onDragEnd?: () => void;
 }) => {
   const controls = useDragControls();
 
@@ -55,10 +59,13 @@ const NoteItem = ({
       dragControls={controls}
       initial={{ rotate: 0 }}
       animate={{ rotate: 0 }}
+      onDragStart={() => onDragStart?.(note.id)}
+      onDragEnd={() => onDragEnd?.()}
       whileDrag={{
         scale: 1.01,
         zIndex: 30,
         boxShadow: "0 10px 24px rgba(15, 23, 42, 0.18)",
+        opacity: 1,
       }}
       dragConstraints={{ left: 0, right: 0 }}
       dragElastic={0.1}
@@ -117,6 +124,8 @@ const NoteItem = ({
 const Notes = () => {
   // Create grouped notes state
   const [notes, setNotes] = useState(mockNotes);
+  const [draggingNoteId, setDraggingNoteId] = useState<string | null>(null);
+  const [draggingCategory, setDraggingCategory] = useState<string | null>(null);
 
   // Group notes by category
   const groupedNotes = notes.reduce(
@@ -167,44 +176,80 @@ const Notes = () => {
     <BackgroundPage background={backgrounds.notes}>
       <Title>Notes</Title>
       <div className="space-y-4">
-        {noteGroups.map(({ category, items }) => (
-          <div
-            key={category}
-            className="space-y-2 bg-background/20 backdrop-blur-sm p-2 rounded-lg border border-background"
-          >
-            <div className="flex items-center justify-between relative">
-              <h3 className="text-center font-semibold text-lg flex-1 ml-[38.86px]">
-                {category}
-              </h3>
-              <Button variant="link" size="sm">
-                <Eye />
-              </Button>
-            </div>
-            <Reorder.Group
-              axis="y"
-              values={items}
-              onReorder={(newOrder) => handleReorder(category, newOrder)}
-              className="space-y-0"
-              layoutScroll={false}
+        {noteGroups.map(({ category, items }) => {
+          const isCurrentGroup = draggingCategory === category;
+
+          return (
+            <div
+              key={category}
+              className={`space-y-2 bg-background/20 backdrop-blur-sm p-2 rounded-lg border transition-colors duration-200 ${
+                isCurrentGroup
+                  ? "border-primary shadow-[0_0_0_1px_rgba(var(--primary),0.45)]"
+                  : "border-background"
+              }`}
             >
-              {items.map((note, index) => (
-                <NoteItem
-                  key={note.id}
-                  note={note}
-                  isFirst={index === 0}
-                  isLast={index === items.length - 1}
-                  isSingle={items.length === 1}
-                />
-              ))}
-              <div className="flex gap-2 w-full mt-2">
-                <Input placeholder={`Add a new note to ${category}`} />
-                <Button type="submit">
-                  <SendHorizonal />
+              <div className="flex items-center justify-between relative">
+                <h3 className="text-center font-semibold text-lg flex-1 ml-[38.86px]">
+                  {category}
+                </h3>
+                <Button variant="link" size="sm">
+                  <Eye />
                 </Button>
               </div>
-            </Reorder.Group>
-          </div>
-        ))}
+              <Reorder.Group
+                axis="y"
+                values={items}
+                onReorder={(newOrder) => handleReorder(category, newOrder)}
+                className="space-y-0"
+                layoutScroll={false}
+              >
+                {items.map((note, index) => {
+                  const isDraggingTile =
+                    draggingNoteId === note.id && draggingCategory === category;
+                  const isSameGroupTile = draggingCategory === category;
+
+                  return (
+                    <div
+                      key={note.id}
+                      className="transition-opacity duration-200"
+                      style={{
+                        opacity:
+                          draggingNoteId === null
+                            ? 1
+                            : isDraggingTile
+                              ? 1
+                              : isSameGroupTile
+                                ? 0.4
+                                : 0,
+                      }}
+                    >
+                      <NoteItem
+                        note={note}
+                        isFirst={index === 0}
+                        isLast={index === items.length - 1}
+                        isSingle={items.length === 1}
+                        onDragStart={(noteId) => {
+                          setDraggingNoteId(noteId);
+                          setDraggingCategory(category);
+                        }}
+                        onDragEnd={() => {
+                          setDraggingNoteId(null);
+                          setDraggingCategory(null);
+                        }}
+                      />
+                    </div>
+                  );
+                })}
+                <div className="flex gap-2 w-full mt-2">
+                  <Input placeholder={`Add a new note to ${category}`} />
+                  <Button type="submit">
+                    <SendHorizonal />
+                  </Button>
+                </div>
+              </Reorder.Group>
+            </div>
+          );
+        })}
       </div>
     </BackgroundPage>
   );

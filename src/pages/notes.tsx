@@ -1,7 +1,7 @@
 import BackgroundPage from "@/components/helpers/background-page";
 import Title from "@/components/ui/title";
 import { backgrounds } from "@/lib/backgrounds";
-import { useState } from "react";
+import { useRef, useState, type RefObject } from "react";
 import { Reorder, useDragControls } from "motion/react";
 import {
   Clock,
@@ -31,6 +31,7 @@ const NoteItem = ({
   isSingle,
   onDragStart,
   onDragEnd,
+  dragConstraints,
 }: {
   note: Note;
   isFirst?: boolean;
@@ -38,6 +39,7 @@ const NoteItem = ({
   isSingle?: boolean;
   onDragStart?: (noteId: string) => void;
   onDragEnd?: () => void;
+  dragConstraints?: RefObject<HTMLElement | null> | null;
 }) => {
   const controls = useDragControls();
 
@@ -57,8 +59,9 @@ const NoteItem = ({
       }`}
       dragListener={false}
       dragControls={controls}
-      initial={{ rotate: 0 }}
-      animate={{ rotate: 0 }}
+      initial={{ rotate: 0, scale: 1 }}
+      animate={{ rotate: 0, scale: 1 }}
+      transition={{ type: "spring", stiffness: 400, damping: 30 }}
       onDragStart={() => onDragStart?.(note.id)}
       onDragEnd={() => onDragEnd?.()}
       whileDrag={{
@@ -67,8 +70,9 @@ const NoteItem = ({
         boxShadow: "0 10px 24px rgba(15, 23, 42, 0.18)",
         opacity: 1,
       }}
-      dragConstraints={{ left: 0, right: 0 }}
-      dragElastic={0.1}
+      dragConstraints={dragConstraints ?? undefined}
+      dragElastic={0}
+      dragPropagation={false}
       style={{ zIndex: 1 }}
     >
       <div className="flex items-center justify-between space-x-2">
@@ -126,6 +130,7 @@ const Notes = () => {
   const [notes, setNotes] = useState(mockNotes);
   const [draggingNoteId, setDraggingNoteId] = useState<string | null>(null);
   const [draggingCategory, setDraggingCategory] = useState<string | null>(null);
+  const groupRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   // Group notes by category
   const groupedNotes = notes.reduce(
@@ -182,10 +187,15 @@ const Notes = () => {
           return (
             <div
               key={category}
-              className={`space-y-2 bg-background/20 backdrop-blur-sm p-2 rounded-lg border transition-colors duration-200 ${
+              ref={(node) => {
+                groupRefs.current[category] = node;
+              }}
+              className={`space-y-2 bg-background/20 backdrop-blur-sm p-2 rounded-lg border transition-all duration-300 ease-out ${
                 isCurrentGroup
-                  ? "border-primary shadow-[0_0_0_1px_rgba(var(--primary),0.45)]"
-                  : "border-background"
+                  ? "border-primary shadow-[0_0_0_1px_rgba(var(--primary),0.45)] opacity-100"
+                  : draggingNoteId !== null
+                    ? "border-background opacity-0"
+                    : "border-background opacity-100"
               }`}
             >
               <div className="flex items-center justify-between relative">
@@ -211,7 +221,7 @@ const Notes = () => {
                   return (
                     <div
                       key={note.id}
-                      className="transition-opacity duration-200"
+                      className="transition-opacity duration-300 ease-out"
                       style={{
                         opacity:
                           draggingNoteId === null
@@ -228,6 +238,11 @@ const Notes = () => {
                         isFirst={index === 0}
                         isLast={index === items.length - 1}
                         isSingle={items.length === 1}
+                        dragConstraints={
+                          groupRefs.current[category]
+                            ? { current: groupRefs.current[category] }
+                            : null
+                        }
                         onDragStart={(noteId) => {
                           setDraggingNoteId(noteId);
                           setDraggingCategory(category);
